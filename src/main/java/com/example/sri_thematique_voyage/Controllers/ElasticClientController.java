@@ -32,10 +32,10 @@ public class ElasticClientController {
 
     // And create the API client
     ElasticsearchClient esClient = new ElasticsearchClient(transport);
-        esClient.indices().create(c -> c
-                .index("products")
-        );
-        Product product = new Product("bk-1", "City bike", 123.0);
+//        esClient.indices().create(c -> c
+//                .index("products")
+//        );
+        Product product = new Product("bk-2", "City bike", 123.0);
 
         IndexResponse response = esClient.index(i -> i
                 .index("products")
