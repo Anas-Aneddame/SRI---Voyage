@@ -1,0 +1,91 @@
+.aboutUs-container{
+    width: 100;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-image: linear-gradient(rgba(20, 20, 20, 0.8),rgba(20, 20, 20, 0.8)),url('../../assets/background.jpg');
+    font-family: century gothic;
+    
+
+    
+}
+
+.section__header{
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgba(6, 144, 199, 0.774);
+
+
+}
+.section__subheader{
+    text-align: justify;
+    font-size : 0.9rem;
+    color : #ebebf0;
+}
+.aboutUs-container{
+    padding : 6rem 4rem;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:2rem;
+    align-items: center;
+    
+}
+
+.aboutUs-container .about-bg{
+    position : absolute;
+    top: 1rem ; 
+    left :37%;
+    transform: translateX(-3rem);
+    max-width: 300px;
+    opacity: 0.4;
+    z-index: -1;
+
+}
+.about__grid{
+    margin-top : 2rem ;
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    gap : 2rem 1rem;
+
+}
+.about__card span{
+    display: inline-block;
+    margin-bottom : .5rem; 
+    padding : 5px 15px;
+    font-size: 1.25rem;
+    background-color: rgba(6, 144, 199, 0.774);
+    border-radius : 2rem;
+    color : white;
+}
+.about__card h4{
+    margin-bottom : 1rem;
+    font-size : 1rem ; 
+    font-weight: 600;
+    color : rgba(6, 144, 199, 0.774);
+    
+}
+
+.about__card p {
+    color : #e3e3ec ;
+    text-align: justify;
+
+    
+}
+.about__image {
+    position: relative;
+    max-width: 550px;
+    max-height: 550px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+    margin-right: 2rem; 
+    height: 90vh;
+    filter : invert(100);
+
+}
+
+.about__image img {
+    width: 100%; 
+    height: 100%;
+}

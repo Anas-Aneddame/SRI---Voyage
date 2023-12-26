@@ -1,0 +1,18 @@
+<section class="aboutUs-container" id="about">
+  <div class="about__image">
+    <img src="../../assets/icon.png" alt="">
+  </div>
+  <div class="aboutUs-content">
+    <h2 class="section__header">À propos</h2>
+    <p class="section__subheader">
+        Bienvenue sur [Nom de votre moteur de recherche], votre compagnon virtuel pour des aventures de voyage inoubliables ! Nous sommes une équipe passionnée de globe-trotters, dédiée à simplifier votre parcours d'exploration du monde.
+    </p>
+    <div class="about__grid">
+        <div class="about__card" *ngFor="let card of aboutCards">
+          <span>{{ card.number }}</span>
+          <h4>{{ card.title }}</h4>
+          <p>{{ card.content }}</p>
+        </div>
+      </div>
+  </div>
+</section>
