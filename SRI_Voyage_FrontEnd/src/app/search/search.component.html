@@ -2,18 +2,44 @@
   <div class="search-container"  [ngClass]="{'expanded': isExpanded}">
       <h1 class="search-logo" [ngClass]="{'logo-hidden':isExpanded}">GOOGLE</h1>
       <div class="search-box" [ngClass]="{'input-focused':isExpanded}">
-        <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchQuery"  (focus)="expandContainer()" (blur)="undoExpand()" />
-        <button ><img src="../../assets/keyboard.png"></button>
-        <button (click)="search()"><img src="../../assets/search.png"></button>
-        <button ><img src="../../assets/filtre.png"></button>
-  
+        <input id="search-input" type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchQuery"  (focus)="expandContainer()" (blur)="undoExpand()" />
+        <button class="search-btns" ><img src="../../assets/keyboard.png"></button>
+        <button class="search-btns" (click)="search()"><img src="../../assets/search.png"></button>
+        <button class="search-btns" ><img src="../../assets/filtre.png"></button>
+        <button class="search-btns" [ngClass]="{'close-icon-hidden':!isQueryFilled()}" (click)="handleDeleteQuery()">
+          <svg class="close-icon" viewBox="0 0 20 20">
+            <path d="M10.185,1.417c-4.741,0-8.583,3.842-8.583,8.583c0,4.74,3.842,8.582,8.583,8.582S18.768,14.74,18.768,10C18.768,5.259,14.926,1.417,10.185,1.417 M10.185,17.68c-4.235,0-7.679-3.445-7.679-7.68c0-4.235,3.444-7.679,7.679-7.679S17.864,5.765,17.864,10C17.864,14.234,14.42,17.68,10.185,17.68 M10.824,10l2.842-2.844c0.178-0.176,0.178-0.46,0-0.637c-0.177-0.178-0.461-0.178-0.637,0l-2.844,2.841L7.341,6.52c-0.176-0.178-0.46-0.178-0.637,0c-0.178,0.176-0.178,0.461,0,0.637L9.546,10l-2.841,2.844c-0.178,0.176-0.178,0.461,0,0.637c0.178,0.178,0.459,0.178,0.637,0l2.844-2.841l2.844,2.841c0.178,0.178,0.459,0.178,0.637,0c0.178-0.176,0.178-0.461,0-0.637L10.824,10z"></path>
+          </svg>
+        </button>
       </div>
+      
+      
       <div class="footer-links">
           <a routerLink="/aboutUs" class="footer-link">À propos</a>
           <div class="footer-links-right">
               <a href="#" class="footer-link">Confidentialite</a>
               <a href="#" class="footer-link">Conditions</a>
           </div>
-    </div>
+      </div>
+  </div>
+  <div *ngIf="isExpanded" class="results-container">
+    <div *ngIf="!searchQuery.length" class="help-text"><span>Please type a keyword to start searching</span></div>
+    <div *ngIf="searchQuery.length" class="results-data">
+      <h1>Results ({{results.length}})</h1>
+      <div class="results">
+        <div *ngFor="let result of results" class="result">
+          <div class="result-info">
+            <h2>{{result.title}}</h2>
+            <p>{{result.description}}</p>
+          </div>
+          <button class="save-btn">
+            <svg class="svg-icon" viewBox="0 0 20 20">
+              <path d="M14.467,1.771H5.533c-0.258,0-0.47,0.211-0.47,0.47v15.516c0,0.414,0.504,0.634,0.802,0.331L10,13.955l4.136,4.133c0.241,0.241,0.802,0.169,0.802-0.331V2.241C14.938,1.982,14.726,1.771,14.467,1.771 M13.997,16.621l-3.665-3.662c-0.186-0.186-0.479-0.186-0.664,0l-3.666,3.662V2.711h7.994V16.621z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
 
+    </div>
+  </div>
 </div>
