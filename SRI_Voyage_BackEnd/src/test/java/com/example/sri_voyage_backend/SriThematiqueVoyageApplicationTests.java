@@ -1,4 +1,4 @@
-package com.example.sri_thematique_voyage;
+package com.example.sri_voyage_backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
