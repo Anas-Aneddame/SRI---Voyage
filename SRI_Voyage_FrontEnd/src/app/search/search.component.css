@@ -86,6 +86,7 @@ h1{
 
   .footer-links {
     position: absolute;
+    z-index: 2;
     bottom: 20px; 
     display: flex;
     justify-content: space-between;
@@ -114,6 +115,13 @@ h1{
 .footer-links-right {
     display: flex;
 }
+.results-title{
+  font-family: century gothic;
+  color : #fff;
+  letter-spacing: 3px;
+  font-size: 2.3rem;
+  margin-bottom: 2rem;
+}
 .results-container{
   padding-top: 2rem;
   display :flex;
@@ -129,11 +137,10 @@ h1{
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 1rem;
-  overflow-y: scroll;
-  height: 45vh;
+  overflow-y:scroll;
+  max-height: 60vh;
 }
 
 .result{
@@ -151,8 +158,11 @@ h1{
 .result-info{
   width: 80%;
 }
-.result-info > h2{
-  text-decoration: underline;
+.result-title{
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+  color: white;
+  font-weight: bold;
 }
 .save-btn{
   background-color: white;

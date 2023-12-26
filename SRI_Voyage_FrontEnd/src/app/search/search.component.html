@@ -25,11 +25,11 @@
   <div *ngIf="isExpanded" class="results-container">
     <div *ngIf="!searchQuery.length" class="help-text"><span>Please type a keyword to start searching</span></div>
     <div *ngIf="searchQuery.length" class="results-data">
-      <h1>Results ({{results.length}})</h1>
+      <h2 class="results-title">Results ({{results.length}})</h2>
       <div class="results">
         <div *ngFor="let result of results" class="result">
           <div class="result-info">
-            <h2>{{result.title}}</h2>
+            <a href="#" class="result-title">{{result.title}}</a>
             <p>{{result.description}}</p>
           </div>
           <button class="save-btn">
