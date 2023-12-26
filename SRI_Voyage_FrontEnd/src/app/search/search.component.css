@@ -17,7 +17,7 @@
     background-image: linear-gradient(rgba(20, 20, 20, 0.8),rgba(20, 20, 20, 0.8)),url('../../assets/background.jpg');
 }
 .search-logo{
-  transition: opacity 0.3s,height 0.3s;
+  transition: opacity 0.3s,margin-bottom 0.3s;
   height: 5rem;
 }
 .expanded{
@@ -28,6 +28,7 @@
 }
 .logo-hidden{
   opacity: 0;
+  margin-bottom: 0.2rem;
   
 }
   
