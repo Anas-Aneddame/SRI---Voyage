@@ -1,16 +1,19 @@
-<div class="search-container">
-    <h1>GOOGLE</h1>
-    <div class="search-box">
-      <input type="text" placeholder="Search..." [(ngModel)]="searchQuery" />
-      <button ><img src="../../assets/keyboard.png"></button>
-      <button (click)="search()"><img src="../../assets/search.png"></button>
-      <button ><img src="../../assets/filtre.png"></button>
-
+<div class="search-page">
+  <div class="search-container"  [ngClass]="{'expanded': isExpanded}">
+      <h1 class="search-logo" [ngClass]="{'logo-hidden':isExpanded}">GOOGLE</h1>
+      <div class="search-box" [ngClass]="{'input-focused':isExpanded}">
+        <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchQuery"  (focus)="expandContainer()" (blur)="undoExpand()" />
+        <button ><img src="../../assets/keyboard.png"></button>
+        <button (click)="search()"><img src="../../assets/search.png"></button>
+        <button ><img src="../../assets/filtre.png"></button>
+  
+      </div>
+      <div class="footer-links">
+          <a routerLink="/aboutUs" class="footer-link">À propos</a>
+          <div class="footer-links-right">
+              <a href="#" class="footer-link">Confidentialite</a>
+              <a href="#" class="footer-link">Conditions</a>
+          </div>
     </div>
-    <div class="footer-links">
-        <a routerLink="/aboutUs" class="footer-link">À propos</a>
-        <div class="footer-links-right">
-            <a href="#" class="footer-link">Confidentialite</a>
-            <a href="#" class="footer-link">Conditions</a>
-        </div>
-  </div>
+
+</div>

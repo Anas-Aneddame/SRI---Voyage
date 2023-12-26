@@ -7,8 +7,15 @@ import { Component } from '@angular/core';
 })
 export class SearchComponent {
   searchQuery: string = '';
-
+  isExpanded: boolean = false;
   search() {
     console.log('Searching for:', this.searchQuery);
+  }
+  expandContainer() {
+    console.log("expandContainer");
+    this.isExpanded = true;
+  }
+  undoExpand() {
+    this.isExpanded = false;
   }
 }
