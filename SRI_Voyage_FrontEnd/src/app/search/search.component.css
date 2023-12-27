@@ -258,7 +258,7 @@ h1{
   display: flex;
   min-height: 100%;
   background-color: white;
-  border-radius: 15px 0 0 15px;
+  border-radius: 13px 0 0 13px;
 }
 .res-img-info{
   width: 45%;

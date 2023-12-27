@@ -200,7 +200,7 @@ public class ElasticSearchController {
                         .id("011")
                         .type("image")
                         .name("Les vacances toniques L'Atlantique comme aire de jeu")
-//                        .city("Agadir")
+                        .city("Agadir")
 //                        .price(3900D)
 //                        .duration(String.valueOf(0))
                         .imageLink("https://www.visitmorocco.com/sites/default/files/thumbnails/image/Catamaran_0.jpg")
@@ -267,6 +267,181 @@ public class ElasticSearchController {
                         .imageLink("https://www.petitfute.com/medias/mag/21527/900_600/139061-les-incontournables-de-tanger.jpg")
                         .description("A deux heures 30 de route au sud est de Tanger, Chefchaouen ou « Chaouen » pour les intimes se niche à 600 m d’altitude sur les contreforts glorieux des montagnes du Rif. Ce grand village pittoresque, magnétique et mystérieux, inscrit au Patrimoine immatériel de l’humanité de l’UNESCO, abrite l’une des médinas les plus charmantes du Maroc réputée pour son architecture céruléenne, avec ses maisons et ses commerces aux multiples teintes bleutées. Se perdre dans ses ruelles étroites d'une grande propreté est un réel plaisir. On ne peut s’empêcher au détour d'un virage de prendre en photo les jolies portes de maisons recouvertes du célèbre pigment bleu que l'on retrouve au marché et qui suscite la joie des aquarellistes. Dans ses nombreuses boutiques, on trouve un artisanat local de qualité, des vêtements de laine, des couvertures tissées et des tapis à un prix raisonnable. Chefchaouen est aussi connue pour son fromage de chèvre local. Située sur la place de Outa El-Hamman, l'impressionnante Kasbah, ocre vestige d’un passé révolu, est une invitation à laisser défiler les heures.\n")
                         .link("https://www.petitfute.com/v46100-chefchaouen-91000/")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("017")
+                        .type("webpage")
+                        .name("Séjour à Essaouira")
+                        .city("Essaouira")
+//                        .price(3900D)
+//                        .duration(String.valueOf(0))
+                        .description("C’est dans un univers de calme et de sérénité que le cœur des traditions marocaines vous invite à passer des vacances de rêve sous un climat chaleureux. Essaouira est une ville où vous prendrez plaisir à découvrir ses souks animés et sa célèbre médina, classée au patrimoine mondial de l’UNESCO depuis 2001. C’est également le lieu de prédilection des amateurs de farniente qui pourront se prélasser sur la belle plage nichée au fond de la baie. Cette étape incontournable à l’ouest de Marrakech vous séduira aussi avec son port où les poissons sont vendus à la criée ou grillés sur place.")
+                        .link("https://www.voyage-prive.com/offres/sejour-a-essaouira")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("018")
+                        .type("webpage")
+                        .name("Voyage Ouarzazate : Vacances et séjour Ouarzazate")
+                        .city("Ouarzazate")
+                        .activities(List.of("Excursion"))
+//                        .price(3900D)
+//                        .duration(String.valueOf(0))
+                        .description("Départ en 4X4 vers le Haut Atlas. Passage par le col Tizi N'Tichka (2 260 m) et continuation vers Telouet. Visite de la kasbah aux riches décors intérieurs. Déjeuner. Continuation vers le ksar d'Aït Ben Haddou, ensemble de bâtiments de terre entourés de murailles, exemple frappant de l'architecture du sud marocain traditionnel. Déjeuner typique. Visite de la kasbah de Taourirt, autrefois résidence du pacha de Marrakech. Dîner et nuit à Ouarzazate.")
+                        .link("https://www.fram.fr/circuit-boucles-sahariennes-en-4x4-circuit-prive-50759.html#918021")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("019")
+                        .type("webpage")
+                        .name("Club Framissima Royal Tafoukt Agadir Resort & Spa")
+                        .city("Agadir")
+                        .price(4700D)
+//                        .duration(String.valueOf(0))
+                        .activities(List.of("Plage","Salle de Sport","Tennis de Table","Piscine","Spa","Centre de Bien-Etre","Discothèque"))
+                        .description("Départ en 4X4 vers le Haut Atlas. Passage par le col Tizi N'Tichka (2 260 m) et continuation vers Telouet. Visite de la kasbah aux riches décors intérieurs. Déjeuner. Continuation vers le ksar d'Aït Ben Haddou, ensemble de bâtiments de terre entourés de murailles, exemple frappant de l'architecture du sud marocain traditionnel. Déjeuner typique. Visite de la kasbah de Taourirt, autrefois résidence du pacha de Marrakech. Dîner et nuit à Ouarzazate.")
+                        .link("https://www.promovacances.com/hotel-framissima-royal-tafoukt-agadir-resort-spa/maroc-agadir-53099.html#1001445")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("020")
+                        .type("webpage")
+                        .name("Week-End Asilah - Tanger À Seulement 860 DHs| Plusieurs Départs Disponibles")
+                        .city("Agadir")
+                        .price(860D)
+//                        .duration(String.valueOf(0))
+                        .description("Départ de Casablanca devant la gare « Casa voyageurs »\n" +
+                                "\n" +
+                                "- Départ de Rabat devant la gare « Rabat ville »\n" +
+                                "\n" +
+                                "- Petit déjeuner libre en route.\n" +
+                                "\n" +
+                                "- Arrivée à Asilah.\n" +
+                                "\n" +
+                                "- Visite de la ville Asilah qui est devenue avec le temps un carrefour d'artistes et d’écrivains. Vous aurez le temps de faire la visite guidée de la médina avec ses maisons peinte blanc-bleu où on remarque le mélange des influences romaines, espagnoles, portugaises et mauresques.\n" +
+                                "\n" +
+                                "- Déjeuner libre à Oued Tahadart, un site naturel entouré d’eaux cristallines et de falaises richement colorées. Les vagues sont populaires auprès des surfeurs, qui viennent profiter de la chaude mer Méditerranée. Tahadart est également propice à la baignade et offre un endroit idéal pour une excursion d’une demi-journée et un barbecue.\n" +
+                                "\n" +
+                                "- Continuation vers Tanger\n" +
+                                "\n" +
+                                "- Installation à l'hôtel ( Douche et détente )\n" +
+                                "\n" +
+                                "- Départ pour la visite de Rmilat.\n" +
+                                "\n" +
+                                "- Puis Visite Cap Spartel Majestueux; Le point de partage des deux étendues d'eau.\n" +
+                                "\n" +
+                                "- Visite de la plage Achakar, la plus célèbre des nombreuses plages de Tanger offrant un panorama unique.\n" +
+                                "\n" +
+                                "- Visite de la grotte d'hercules où le bleu de l'océan atlantique et le ciel forment un contraste unique\n" +
+                                "\n" +
+                                "- Dîner libre et nuitée à l'hôtel.")
+                        .link("http://www.ajinsafro.ma/voyage-national/weekend-tanger-asilah-plusieurs-departs-disponibles-66")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("021")
+                        .type("webpage")
+                        .name("Week-End à Akchour - Chefchaouen - Fnideq - M'diq | Départ Chaque Vendredi Soir !")
+                        .city("Akchour")
+//                        .price(860D)
+//                        .duration(String.valueOf(0))
+                        .description("Le voyage débute avec des départs depuis Casablanca et Rabat. Le premier jour, explorez Akchour, dégustez un petit-déjeuner en pleine nature, puis partez en randonnée dans la vallée de Talembote. Après un déjeuner libre, dirigez-vous vers Chefchaouen pour une visite guidée des lieux emblématiques. La journée se termine à l'hôtel avec du temps libre. Le deuxième jour commence par un petit-déjeuner inclus, suivi d'une visite à Fnideq pour du shopping au souk et une pause café en bord de mer à M'diq. Après un déjeuner libre, le voyage se conclut avec le retour à la maison.")
+                        .link("http://www.ajinsafro.ma/voyage-national/weekend-tanger-asilah-plusieurs-departs-disponibles-66")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("022")
+                        .type("image")
+                        .name("Comment visiter Akchour et le Pont de Dieu : une perle cachée de Chefchaouen !")
+                        .city("Akchour")
+//                        .price(860D)
+//                        .duration(String.valueOf(0))
+                        .description("Un voyage à Akchour - le Pont de Dieu et les grandes et petites cascades - est incontournable si vous prévoyez de rester deux jours ou plus à Chefchaouen et que vous recherchez une ou deux perles cachées.\n" +
+                                "\n" +
+                                "À seulement 45 minutes de Chefchaouen, les montagnes du Rif vous attendent... c'est le genre de destination que vous visitez si vous aimez les voyages hors des sentiers battus. Parfait pour une excursion d'une journée ou un séjour d'une nuit, une visite des eaux claires et des restaurants au bord de la rivière à Akchour et du Pont de Dieu est une aventure montagnarde marocaine à ne pas manquer !\n" +
+                                "\n" +
+                                "Nous avions entendu parler de quelques choses et vu quelques photos en explorant les activités à faire à Chefchaouen. Mais avant de décider nous-mêmes de nous aventurer dans les vallées et les rivières d'Akchour, nous voulions plus d'informations. Cependant, il semblait que les détails précis étaient difficiles à obtenir.")
+                        .imageLink("https://www.myfreerangefamily.com/wp-content/uploads/2022/11/Akchour-Gods-Bridge-Chefchaouen-River-Picnic-Tables-3.jpg")
+                        .link("https://www.myfreerangefamily.com/gods-bridge-akchour-chefchaouen/")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("023")
+                        .type("video")
+                        .name("370- SOS tourisme de masse !! Safi, loin de tout ça ! #truck #maroc #famillenombreuse")
+                        .city("Safi")
+//                        .price(860D)
+//                        .duration(String.valueOf(0))
+                        .description("Dans cette vidéo, nous vous emmenons découvrir Safi, cette ville qui ne subit pas encore le tourisme de masse et qui est très agréable. Vous voulez nous aider dans l'aventure ou dans notre association humainitaire, vous pouvez le faire via paypal ou via notre boutique en ligne. ")
+                        .link("https://www.youtube.com/watch?v=LWiCmsZQMRE&pp=ygULdm95YWdlIHNhZmk%3D")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("024")
+                        .type("video")
+                        .name("122-visite de Safi et Oualidia (vanlife Maroc en camping car )")
+                        .city("Safi")
+//                        .price(860D)
+//                        .duration(String.valueOf(0))
+                        .activities(List.of("Camping "))
+                        .description("A bord de notre camping car Baraka nous visitons les villes de Safi et Oualidia au Maroc. - Safi connue pour ses poteries,découvrez pourquoi elle est inscrite au livre Guinness des records. - Oualidia connue pour sa magnifique lagune et tous les amateurs d'huîtres et plateau de fruits de mer. notre site web : https://barakavanlife.company.site/ nous avons écrit un guide de conseils, santé , carte sim, argent, présentation des différentes autorités... d'astuces, a faire ,a ne pas faire...pour préparer et faciliter votre voyage au Maroc")
+                        .link("https://www.youtube.com/watch?v=zgWiV31YayQ")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("025")
+                        .type("image")
+                        .name("Que faire lors d’un voyage à Tétouan, Maroc?")
+                        .city("Tétouan")
+//                        .price(860D)
+//                        .duration(String.valueOf(0))
+                        .description("Tétouan, également connue sous le nom de « colombe blanche », est une belle ville du nord du Maroc située sur les pentes des montagnes du Rif. La ville est devenue une destination touristique populaire pour ses charmantes rues étroites aux maisons blanchies à la chaux, bordées de marchés et d’échoppes d’artisanat et où l’on trouve des portes voûtées colorées, décorées de carreaux géométriques. En outre, il y a beaucoup d’autres lieux d’intérêt à voir à Tétouan, comme l’Ensanche, la place Hassan II ou la place Mulay Mehdi.\n" +
+                                "Une journée suffit amplement pour découvrir la ville qui, si elle n’a pas autant à offrir que Marrakech ou Casablanca, n’en reste pas moins une destination attachante où vous serez surpris par la gentillesse de ses habitants. Chez Passporter, nous avons décidé de vous aider à organiser votre voyage à Tétouan, c’est pourquoi nous avons préparé ce billet avec toutes les informations dont vous avez besoin pour profiter de votre visite. Nous vous indiquons ce qu’il faut voir, comment s’y rendre, où manger et où loger et bien d’autres conseils qui vous aideront pendant votre séjour.\n")
+                        .imageLink("https://passporterapp.com/fr/blog/wp-content/uploads/2023/09/que-faire-a-Tetouan.webp")
+                        .link("https://passporterapp.com/fr/blog/maroc/que-faire-voyage-tetouan/")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("026")
+                        .type("image")
+                        .name("Week-end à Belyounech - Tétouan - Martil - M'diq - Fnideq | Plusieurs Départs Disponibles")
+                        .city("Tétouan")
+//                        .price(860D)
+//                        .duration(String.valueOf(0))
+                        .description("Découvrez la richesse du nord du Maroc lors d'un week-end fascinant à Belyounech, Tétouan, Martil, M'diq et Fnideq. Profitez de notre offre complète qui inclut un transport touristique climatisé, un hébergement confortable dans un hôtel 3 étoiles avec petit-déjeuner en chambre double ou triple, un accompagnement professionnel tout au long du séjour, et une assurance du transport pour une tranquillité d'esprit totale.\n" +
+                                "Les départs sont garantis chaque vendredi soir, avec la flexibilité offerte par plusieurs départs, à condition d'avoir un minimum de 12 personnes. Réservez dès maintenant pour une escapade mémorable, explorant des destinations magnifiques, embrassant la culture locale et créant des souvenirs inoubliables dans le nord enchanteur du Maroc.\n")
+                        .imageLink("https://www.ajinsafro.ma/static/team/2017/0531/14962628315848.jpg")
+                        .link("http://www.ajinsafro.ma/voyage-national/weekend-a-belyounech-tetouan-martil-mdiq-fnideq-199")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("027")
+                        .type("video")
+                        .name("Voyage au Maroc | Visite de la magnifique ville d’Al Hoceima")
+                        .city("Hoceima")
+//                        .price(860D)
+//                        .duration(String.valueOf(0))
+                        .description("Viens découvrir avec moi la magnifique ville d’Al Hoceima")
+                        .link("https://www.youtube.com/watch?v=dN_h7SekMSc")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("028")
+                        .type("webpage")
+                        .name("Un guide complet du surf à Taghazout")
+                        .city("Taghazout")
+                        .activities(List.of("Surfing"))
+//                        .price(860D)
+//                        .duration(String.valueOf(0))
+                        .description("Surfer à Taghazout au Maroc est une expérience inoubliable. Ce charmant village côtier, situé juste au nord d'Agadir, est béni par des vagues constantes et un climat idéal toute l'année.\n" +
+                                "\n" +
+                                "Que vous soyez un surfeur chevronné ou un débutant, Taghazout propose une large gamme de spots de surf adaptés à tous les niveaux d'expertise. Avec des habitants accueillants, une cuisine délicieuse et une atmosphère décontractée, il n'est pas étonnant que Taghazout soit devenu un havre pour les amateurs de surf du monde entier.\n" +
+                                "\n" +
+                                "Alors, pourquoi ne pas préparer votre planche, enfiler une combinaison et explorer la scène du surf dans ce joyau caché sur la côte marocaine ? Vous ne le regretterez pas.")
+                        .link("https://www.youtube.com/watch?v=dN_h7SekMSc")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("029")
+                        .type("webpage")
+                        .name("Le Parachutisme au Maroc à Beni Mellal")
+                        .city("Beni Mellal")
+                        .activities(List.of("Parachitisme"))
+//                        .price(860D)
+//                        .duration(String.valueOf(0))
+                        .description("Le Saut en Tandem\n" +
+                                "Le saut en Tandem est la façon la plus facile est sûre de découvrir la chute libre ; le rêve d'Icare !\n" +
+                                "C'est une expérience incomparable avec tout ce que vous avez essayé avant !\n" +
+                                "Accroché à un moniteur très expérimenté vous avez juste à profiter de cette sensation intense et inoubliable !\n")
+                        .link("https://yallah-skydive.com/")
                         .build()
         );
 
