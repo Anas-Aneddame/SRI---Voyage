@@ -1,10 +1,7 @@
 package com.example.sri_voyage_backend.Controllers;
 
-import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import com.example.sri_voyage_backend.Entities.SearchDocument;
-import com.example.sri_voyage_backend.Entities.SearchFilter;
 import com.example.sri_voyage_backend.Services.ElasticClient;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -20,8 +17,8 @@ public class ElasticSearchController {
     }
 
     @GetMapping("/query/{searchtext}")
-    public List<SearchDocument> query(@PathVariable String searchtext, @RequestParam(required=false)String price){
-        System.out.println(price);
+    public List<SearchDocument> query(@PathVariable String searchtext){
+
         return this.elasticClient.queryDocument(searchtext);
     }
 

@@ -1,6 +1,7 @@
 package com.example.sri_voyage_backend.Services;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.query_dsl.MatchQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch._types.query_dsl.RangeQuery;
 
@@ -53,7 +54,7 @@ public class ElasticClient {
 //        return esClient;
     }
 
-    public List<SearchDocument> queryDocument( String searchtext)  {
+    public List<SearchDocument> queryDocument(String searchtext)  {
         AnalyzeRequest.Builder analyzeRequestBuilder = new AnalyzeRequest.Builder();
         AnalyzeRequest analyzeRequest = analyzeRequestBuilder.analyzer("french").text(searchtext).build();
         AnalyzeResponse analyzeResponse = null;
@@ -73,8 +74,19 @@ public class ElasticClient {
             queryList.add(Query.of(sh->sh.fuzzy(f->f.field("description").value(word.token()))));
             queryList.add(Query.of(sh->sh.fuzzy(f->f.field("name").value(word.token()))));
             queryList.add(Query.of(sh->sh.fuzzy(f->f.field("city").value(word.token()))));
+            queryList.add(Query.of(sh->sh.fuzzy(f->f.field("activities").value(word.token()))));
+
         }
 
+        Query byName = MatchQuery.of(m -> m
+                .field("city")
+                .query("marrakech")
+        )._toQuery();
+
+        Query byMaxPrice = RangeQuery.of(r -> r
+                .field("price")
+                .lte(JsonData.of(190.0))
+        )._toQuery();
 
         SearchResponse<SearchDocument> response = null;
         try {
@@ -83,7 +95,7 @@ public class ElasticClient {
                             .query(q -> q.bool(
                                     b->b.should(
                                             queryList
-                                    ))
+                                    ).must(byMaxPrice,byName))
                             ),
                     SearchDocument.class
             );
