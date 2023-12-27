@@ -14,9 +14,20 @@ import { HttpClient } from '@angular/common/http';
 export class SearchComponent implements AfterViewInit{
   constructor(private zone:NgZone,public dialog: MatDialog,private httpClient: HttpClient){
   }
+  minBudget!: number;
+  maxBudget!: number;
+  selectedCity : String | undefined;
+  searchQuery: string = '';
+  isExpanded: boolean = false;
+  filterData: any;
+  isError = false;
+  renderedResults:any[] = []
+
+
+
   @ViewChild('searchInput')
   searchInput!: ElementRef;
-  //paths for icons
+
   docTypesIcons:any = {
     'webpage':'../../assets/site.svg',
     'image':'../../assets/image.svg',
@@ -31,8 +42,7 @@ export class SearchComponent implements AfterViewInit{
     console.log(inputEl)
     this.searchQuery = this.searchInput.nativeElement.value
   }
-  searchQuery: string = '';
-  isExpanded: boolean = false;
+
 
   results:any[] = []
   expandContainer() {
@@ -43,7 +53,6 @@ export class SearchComponent implements AfterViewInit{
     if(this.searchQuery) return
     this.isExpanded = false;
   }
-  filterData: any;
 
 
 
@@ -56,21 +65,51 @@ export class SearchComponent implements AfterViewInit{
           
         }
       });
-    
+     
       dialogRef.afterClosed().subscribe((result:any) => {
-        console.log('Dialog closed with result:', result);
+        if(result !== undefined){
+        console.log('Dialog closed with  result:', result);
+        this.selectedCity = result.selectedCity;
+        this.minBudget = result.minBudget;
+        this.maxBudget = result.maxBudget;}
       });
     }
-  isError = false;
-  renderedResults:any[] = []
+
   search() {
     if(!this.searchQuery){
       this.isError = true;
       setTimeout(()=>this.isError=false,2000)
       return;
     }
+    const searchParams = {
+      minBudget: this.minBudget,
+      maxBudget: this.maxBudget,
+      selectedCity: this.selectedCity
+    };
+    const headers = {
+      'Content-Type': 'application/json'
+    };
     const apiUrl = `http://localhost:8090/query/${this.searchQuery}`;
 
+    if (Object.values(searchParams).some(value => value !== undefined && value !== '')) {
+      console.log(searchParams);
+      this.httpClient.post(apiUrl, searchParams,{headers}).subscribe(
+        (response: any) => {
+          this.results = response;
+          this.renderedResults = this.results;
+          this.changeSelectedDocType('all');
+          console.log('Search results:', this.results);
+          this.minBudget = undefined!;
+          this.maxBudget = undefined!;
+          this.selectedCity = '';
+        },
+        (error) => {
+          console.error('Error fetching search results:', error);
+        }
+      );
+    } else {
+
+    
     this.httpClient.get(apiUrl).subscribe(
       (response: any) => {
         this.results = response;
@@ -83,7 +122,7 @@ export class SearchComponent implements AfterViewInit{
         console.error('Error fetching search results:', error);
       }
     );
-  }
+  }}
 
   isQueryFilled(){
     return this.searchQuery && this.searchQuery.length >0

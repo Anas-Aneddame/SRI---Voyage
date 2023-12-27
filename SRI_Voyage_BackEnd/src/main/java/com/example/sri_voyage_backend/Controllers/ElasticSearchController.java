@@ -18,18 +18,21 @@ public class ElasticSearchController {
         this.elasticClient=elasticClient;
     }
 
+    @PostMapping("/query/{searchtext}")
+    public List<SearchDocument> query(@PathVariable String searchtext,@RequestBody SearchFilter searchFilter){
+
+        System.out.println(searchFilter);
+
+        return this.elasticClient.queryDocumentPost(searchtext,searchFilter);
+    }
     @GetMapping("/query/{searchtext}")
     public List<SearchDocument> query(@PathVariable String searchtext){
 
 
         return this.elasticClient.queryDocumentGet(searchtext);
     }
-    @PostMapping("/query/{searchtext}")
-    public List<SearchDocument> query(@PathVariable String searchtext,@RequestBody SearchFilter searchFilter){
-        System.out.println(searchFilter);
 
-        return this.elasticClient.queryDocumentPost(searchtext, searchFilter);
-    }
+
 
 
     @GetMapping("/addDocs")
