@@ -160,6 +160,28 @@ public class ElasticSearchController {
 //                        .duration(String.valueOf(0))
                         .description("Un week-end à Marrakech")
                         .link("https://www.youtube.com/watch?v=1t99jtpn_XU")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("009")
+                        .type("webpage")
+                        .name("Club Framissima Les Idrissides Aqua Parc")
+                        .city("Marrakech")
+                        .price(3700D)
+//                        .duration(String.valueOf(0))
+                        .activities(List.of("Salle de sport","Tennis de Table","Piscine","Piscine Couverte","Aquapark"))
+                        .description("De beaux paysages, un accueil chaleureux, une cuisine au top et des animations pour des vacances inoubliables, c'est l'engagement de nos clubs Framisssima ! ")
+                        .link("https://www.youtube.com/watch?v=1t99jtpn_XU")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("010")
+                        .type("webpage")
+                        .name("Club Jumbo Kenzi Europa")
+                        .city("Marrakech")
+                        .price(3900D)
+//                        .duration(String.valueOf(0))
+                        .activities(List.of("Tennis","Plage","Salle de Sport","Hammam","Sauna","Basket Ball","Football","Handball","Piscine","Centre de Bien-Etre"))
+                        .description("Des vacances décontractées avec du sport, de la culture, de la détente ou du farniente, faites vos jeux ! Les vacances club en famille, entre amis, à prix malin ! ")
+                        .link("https://www.youtube.com/watch?v=1t99jtpn_XU")
                         .build()
         );
 

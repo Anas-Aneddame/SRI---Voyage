@@ -55,6 +55,7 @@ export class SearchComponent implements AfterViewInit{
       });
     }
   isError = false;
+  renderedResults:any[] = []
   search() {
     if(!this.searchQuery){
       this.isError = true;
@@ -66,7 +67,10 @@ export class SearchComponent implements AfterViewInit{
     this.httpClient.get(apiUrl).subscribe(
       (response: any) => {
         this.results = response;
+        this.renderedResults = this.results
+        this.changeSelectedDocType('all')
         console.log('Search results:', this.results);
+
       },
       (error) => {
         console.error('Error fetching search results:', error);
@@ -83,4 +87,16 @@ export class SearchComponent implements AfterViewInit{
       this.isExpanded = false;
     });
   }
+
+  selectedDocType:string = 'all';
+  changeSelectedDocType(docType:string){
+    this.selectedDocType = docType;
+    if(this.selectedDocType !== 'all'){
+      this.renderedResults = this.results.filter((doc:any)=>doc.type===this.selectedDocType)
+    }
+    else{
+      this.renderedResults = this.results
+    }
+  }
+
 }
