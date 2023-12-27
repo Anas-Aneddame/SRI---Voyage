@@ -101,7 +101,7 @@ public class ElasticClient {
             )._toQuery();
             queryFilterList.add(byMaxPrice);
         }
-        if(searchFilter.getSelectedActivities()!=null)
+        if(searchFilter.getSelectedActivities().size() > 0)
         {
 
             String activityString =  StringUtils.join(searchFilter.getSelectedActivities(), ' ');
