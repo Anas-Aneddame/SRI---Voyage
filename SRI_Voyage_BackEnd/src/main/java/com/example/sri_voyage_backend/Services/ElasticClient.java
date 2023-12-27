@@ -70,7 +70,7 @@ public class ElasticClient {
             stringBuilder.append(tok.token()+" ");
 //            analysedSearchText=analysedSearchText+" "+tok.token();
         }
-
+        
         String finalAnalysedSearchText = stringBuilder.toString();
         SearchResponse<SearchDocument> response = null;
         try {

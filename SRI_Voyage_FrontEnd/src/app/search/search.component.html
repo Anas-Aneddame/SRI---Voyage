@@ -2,7 +2,7 @@
   <div class="search-container"  [ngClass]="{'expanded': isExpanded}">
       <h1 class="search-logo" [ngClass]="{'logo-hidden':isExpanded}">GOOGLE</h1>
       <div class="search-box" [ngClass]="{'input-focused':isExpanded}">
-        <input id="search-input" type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchQuery"  (focus)="expandContainer()" (blur)="undoExpand()" />
+        <input #searchInput id="search-input" type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchQuery"  (focus)="expandContainer()" (blur)="undoExpand()" />
         <button class="search-btns" ><img src="../../assets/keyboard.png"></button>
         <button class="search-btns" (click)="search()"><img src="../../assets/search.png"></button>
         <button class="search-btns" ><img src="../../assets/filtre.png"></button>
@@ -30,7 +30,7 @@
       <div class="results">
         <div *ngFor="let result of results" class="result">
           <div class="result-info">
-            <a href="#" class="result-title">{{result.title}}</a>
+            <a href="{{result.link}}" class="result-title">{{result.name}}</a>
             <p>{{result.description}}</p>
           </div>
           <button class="save-btn">
