@@ -66,6 +66,7 @@ public class ElasticClient {
             analyzeResponse = elasticsearchClient.indices().analyze(
                     analyzeRequest
             );
+            System.out.println(analyzeResponse);
         } catch (IOException e) {
             System.out.println("Error with Analyzer");
             throw new RuntimeException(e);
@@ -101,7 +102,7 @@ public class ElasticClient {
             )._toQuery();
             queryFilterList.add(byMaxPrice);
         }
-        if(searchFilter.getSelectedActivities()!=null)
+        if(searchFilter.getSelectedActivities().size()>0)
         {
 
             String activityString =  StringUtils.join(searchFilter.getSelectedActivities(), ' ');
