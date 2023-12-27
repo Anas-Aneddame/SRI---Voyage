@@ -2,7 +2,7 @@
   <div class="search-container"  [ngClass]="{'expanded': isExpanded}">
       <h1 class="search-logo" [ngClass]="{'logo-hidden':isExpanded}">TravelSearch</h1>
       <div class="search-box" [ngClass]="{'input-focused':isExpanded}">
-        <input #searchInput (keyup.enter)="search()" id="search-input" type="text" class="search-input" placeholder="Rechercher..." [(ngModel)]="searchQuery"  (focus)="expandContainer()" (blur)="undoExpand()" />
+        <input #searchInput (keyup.enter)="search()" id="search-input" type="text" class="search-input" placeholder="Rechercher..." (input)="handleQueryChange($event)" [(ngModel)]="searchQuery"  (focus)="expandContainer()" (blur)="undoExpand()" />
         <button class="search-btns" (click)="search()"><img src="../../assets/search.png"></button>
         <button class="search-btns" (click)="openPopup()" ><img src="../../assets/filtre.png"></button>
         <button class="search-btns" [ngClass]="{'close-icon-hidden':!isQueryFilled()}" (click)="handleDeleteQuery()">
@@ -24,8 +24,8 @@
   </div>
   <!--webpage - video - ...-->
   <div *ngIf="isExpanded" class="results-container">
-    <div *ngIf="!searchQuery.length" class="help-text"><span>Commencer à rechercher des endroits, vous pouvez filtrer les résultats.</span></div>
-    <div *ngIf="searchQuery.length" class="results-data">
+    <div *ngIf="!areResultsRendered" class="help-text"><span>Commencer à rechercher des endroits, vous pouvez filtrer les résultats.</span></div>
+    <div *ngIf="areResultsRendered" class="results-data">
       <div class="results-header">
         <h2 class="results-title">Results ({{results.length}})</h2>
         <button class="filter-option" [ngClass]="{'selected-option':selectedDocType==='all'}" (click)="changeSelectedDocType('all')">All</button>

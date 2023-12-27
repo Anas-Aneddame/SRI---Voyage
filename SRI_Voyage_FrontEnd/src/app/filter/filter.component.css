@@ -52,6 +52,7 @@
     padding: 10px 20px;
     margin: 5px;
     background-color: white;
+    border: 1px  solid;
     color: black;
     border: none;
     cursor: pointer;
@@ -60,7 +61,7 @@
   
   .custom-button:hover {
     background-color: black;
-    border: 1px white solid;
+    
     color: white;
     transition: 0.3s;
     }
