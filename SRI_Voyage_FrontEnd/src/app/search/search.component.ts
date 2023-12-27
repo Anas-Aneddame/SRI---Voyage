@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { PopupService } from '../popup/popup.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FilterComponent } from '../filter/filter.component';
+import { HttpClient } from '@angular/common/http';
+
 
 
 
@@ -14,9 +15,6 @@ import { FilterComponent } from '../filter/filter.component';
 export class SearchComponent {
   searchQuery: string = '';
   isExpanded: boolean = false;
-  search() {
-    console.log('Searching for:', this.searchQuery);
-  }
   expandContainer() {
     console.log("expandContainer");
     this.isExpanded = true;
@@ -26,7 +24,8 @@ export class SearchComponent {
   }
   filterData: any;
 
-  constructor(public dialog: MatDialog,) {}
+  constructor(public dialog: MatDialog,private httpClient: HttpClient) {}
+
 
 
 
@@ -42,4 +41,13 @@ export class SearchComponent {
         console.log('Dialog closed with result:', result);
       });
     }
+  search() {
+    // Effectuez la requête HTTP vers votre backend Spring Boot
+    const apiUrl = `http://localhost:8090/query/${this.searchQuery}`;
+
+    this.httpClient.get(apiUrl).subscribe((response) => {
+      // Traitez la réponse ici, par exemple, affichez-la dans la console
+      console.log('Search results:', response);
+    });
+  }
 }
