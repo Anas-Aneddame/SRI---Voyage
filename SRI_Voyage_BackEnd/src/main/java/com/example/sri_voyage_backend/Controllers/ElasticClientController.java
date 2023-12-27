@@ -47,12 +47,6 @@ public class ElasticClientController {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
-
-//
-//                Product product = new Product("ph-1", "City Phone", 123.0,"Best Phone in the world !");
-//
         Map<String, Property> propertyMap = new HashMap<>();
         propertyMap.put("id", new Property.Builder().text(t->t.analyzer("french")).build());
         propertyMap.put("name", new Property.Builder().text(t->t.analyzer("french")).build());
@@ -63,72 +57,94 @@ public class ElasticClientController {
         propertyMap.put("description", new Property.Builder().text(t->t.analyzer("french")).build());
         propertyMap.put("type", new Property.Builder().text(t->t.analyzer("french")).build());
 
-
-        List<String> stopWords = List.of("a", "afin", "ai", "ainsi", "après", "attendu", "au", "aujourd", "auquel", "aussi",
-                "autre", "autres", "aux", "auxquelles", "auxquels", "avait", "avant", "avec", "avoir",
-                "c", "car", "ce", "ceci", "cela", "celle", "celles", "celui", "cependant", "certain",
-                "certaine", "certaines", "certains", "ces", "cet", "cette", "ceux", "chez", "ci",
-                "combien", "comme", "comment", "concernant", "contre", "d", "dans", "de", "debout",
-                "dedans", "dehors", "delà", "depuis", "derrière", "des", "désormais", "desquelles",
-                "desquels", "dessous", "dessus", "devant", "devers", "devra", "divers", "diverse",
-                "diverses", "doit", "donc", "dont", "du", "duquel", "durant", "dès", "elle", "elles",
-                "en", "entre", "environ", "est", "et", "etc", "etre", "eu", "eux", "excepté", "hormis",
-                "hors", "hélas", "hui", "il", "ils", "j", "je", "jusqu", "jusque", "l", "la", "laquelle",
-                "le", "lequel", "les", "lesquelles", "lesquels", "leur", "leurs", "lorsque", "lui", "là",
-                "ma", "mais", "malgré", "me", "merci", "mes", "mien", "mienne", "miennes", "miens", "moi",
-                "moins", "mon", "moyennant", "même", "mêmes", "n", "ne", "ni", "non", "nos", "notre",
-                "nous", "néanmoins", "nôtre", "nôtres", "on", "ont", "ou", "outre", "où", "par", "parmi",
-                "partant", "pas", "passé", "pendant", "plein", "plus", "plusieurs", "pour", "pourquoi",
-                "proche", "près", "puisque", "qu", "quand", "que", "quel", "quelle", "quelles", "quels",
-                "qui", "quoi", "quoique", "revoici", "revoilà", "s", "sa", "sans", "sauf", "se", "selon",
-                "seront", "ses", "si", "sien", "sienne", "siennes", "siens", "sinon", "soi", "soit",
-                "son", "sont", "sous", "suivant", "sur", "ta", "te", "tes", "tien", "tienne", "tiennes",
-                "tiens", "toi", "ton", "tous", "tout", "toute", "toutes", "tu", "un", "une", "va", "vers",
-                "voici", "voilà", "vos", "votre", "vous", "vu", "vôtre", "vôtres", "y", "à", "ça", "ès",
-                "été", "être", "ô");
-//
 //        CreateIndexResponse responseAnalyser = esClient.indices().create(
 //                i-> i.index("voyage")
-//                        .settings(
-//                                s->s.analysis(
-//                                        a->a.filter("french_stop",sd->sd.definition(ff->ff.stop(sw->sw.stopwords(stopWords)))).analyzer("rebuilt_french",
-//                                                f->f.custom(v->v.tokenizer("standard").filter("lowercase","french_stop")))
-//                                )
-//                        )
 //                        .mappings(
 //                        m->m.properties(propertyMap)
 //                        ));
-//        Product product = new Product("bk-1", "Vélo de montagne", 123.0,"Le vélo de montagne enduro électrique SANTA CRUZ Heckler 9 2022 n'a pas pour but de rendre les choses faciles, mais de les rendre possibles. Il est muni d'un moteur Shimano et d'une batterie de 720 Wh pour une puissance accrue.");
-//        Product product = new Product("Mo-1", "Souris Gamer", 123.0,"Travaillez librement avec la souris Logitech M190. Sans fil, elle vous permet de vous déplacer librement jusqu'à 10 mètres sans délai ni interférences. De plus, sa forme, de taille standard, est adaptée à la main droite comme à la main gauche et permet de positionner sa main confortablement. Et avec un capteur optique de 1000 dpi de la souris M190 vous garantit un contrôle réactif et fluide du pointeur, permettant un suivi précis et une sélection de texte aisée.");
+
+        List<SearchDocument> searchDocumentList=List.of(
+                new SearchDocument().builder()
+                        .id("001")
+                        .type("webpage")
+                        .name("Promenade en dromadaire, tour en quad et hammam traditionnel - Transport inclus depuis Marrakech")
+                        .city("Marrakech")
+                        .price(690.00)
+                        .duration(String.valueOf(5))
+                        .description("Profitez d’une activité complète à Marrakech en combinant balade en dromadaire, quad et Hammam traditionnel !\n" +
+                                "\n" +
+                                "Votre chauffeur viendra vous chercher à votre hôtel de Marrakech. Vous débuterez votre journée par une balade à dos de dromadaire dans la célèbre Palmeraie, située au nord de la ville.\n" +
+                                "\n" +
+                                "Vous prendrez ensuite, les commandes d'un quad et bénéficierez d’un temps d’adaptation pour maitriser la conduite.\n" +
+                                "Une fois prêt, vous partirez pour un tour d’environ 1h30 lors duquel vous pourrez admirer les paysages de la Palmeraie et la ville de Marrakech au loin.\n" +
+                                "\n" +
+                                "Avant de regagner la ville, vous profiterez d’une pause pour déguster un thé à la menthe marocain.\n" +
+                                "\n" +
+                                "Pour vous remettre de ces sensations fortes, vous passerez les portes d’un hammam pour un moment de détente.\n" +
+                                "Au programme : gommage traditionnel au savon noir suivi d’un massage relaxant à l’huile d’argan.\n" +
+                                "\n" +
+                                "Le hammam traditionnel est reconnu pour ses bienfaits purifiants, vous en ressortirez revivifié et avec une sensation de sérénité.\n" +
+                                "\n" +
+                                "Vous vivrez une journée d’aventures, de découverte, de détente et de traditions à Marrakech !")
+                        .link("https://activites.routard.com/marrakech/promenade-en-dromadaire-tour-en-quad-et-hammam-traditionnel---transport-inclus-depuis-marrakech?c=1x0")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("002")
+                        .type("webpage")
+                        .name("Balade en dromadaire dans les environs d'Agadir")
+                        .city("Agadir")
+                        .price(250.00)
+                        .description("Découvrez les alentours d’Agadir lors de cette randonnée à dos de dromadaire !\n" +
+                                "\n" +
+                                "Depuis votre hôtel, vous serez amené à un ranch où vous choisirez de monter à dos de dromadaire pour parcourir les environs d’Agadir lors d'une balade relaxante.\n" +
+                                "\n" +
+                                "Vous traverserez une forêt d’eucalyptus située à proximité du palais royal. Vous longerez également le fleuve du Oued Souss d'où vous profiterez d’une superbe vue sur des paysages naturels.\n" +
+                                "\n" +
+                                "A la fin de votre randonnée, vous dégusterez un thé à la menthe et quelques pâtisseries marocaines avant d'être ramené à votre hôtel.")
+                        .link("https://activites.routard.com/agadir/balade-en-dromadaire-dans-les-environs-dagadir?c=2x0")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("003")
+                        .type("webpage")
+                        .name("Excursion d’une journée aux cascades d’Ouzoud – Au départ de Marrakech")
+                        .city("Marrakech")
+                        .price(190.00)
+                        .description("Evadez-vous le temps d’une journée au départ de Marrakech et découvrez les magnifiques cascades d’Ouzoud !\n" +
+                                "\n" +
+                                "Situées à environ 150km de Marrakech, au cœur de l’Atlas et à plus de 100 mètres de hauteur, les cascades d’Ouzoud sont les plus grandes du pays.\n" +
+                                "Ces chutes d’eaux sont classées parmi les plus beaux sites du Maroc.\n" +
+                                "\n" +
+                                "Après avoir été récupéré à votre hôtel à Marrakech, vous prendrez la route vers l’Atlas et vous parcourrez les paysages naturels vous menant jusqu’à Ouzoud.\n" +
+                                "\n" +
+                                "Une fois sur place, vous profiterez d’un temps libre pour vous promener parmi les oliviers. Vous vous rapprocherez de plus en plus des cascades jusqu’à vous retrouver en face. Vous pourrez alors profiter du lieu et vous détendre face à ce merveilleux paysage.\n" +
+                                "\n" +
+                                "Avec de la chance, vous pourriez même rencontrer de petits singes !\n" +
+                                "\n" +
+                                "Si vous le souhaitez, vous déjeunerez dans un restaurant à la cuisine locale situé le long de la rivière avec un point de vue magnifique sur les chutes d’eaux.\n" +
+                                "\n" +
+                                "Après avoir profité de cette excursion, vous serez raccompagné à votre hôtel de Marrakech en fin de journée.")
+                        .link("https://activites.routard.com/marrakech/excursion-dune-journee-aux-cascades-douzoud-depart-marrakech?c=1x0")
+                        .build()
+        );
+
+//        searchDocumentList.forEach(searchDocument -> {
+//            try {
+//                esClient.index(i -> i
+//                        .index("voyage")
+//                        .id(searchDocument.getId())
+//                        .document(searchDocument)
+//                );
+//            } catch (IOException e) {
+//                System.out.println("Problem in Indexing");
+//                throw new RuntimeException(e);
+//            }
+//        });
 
 
-//        SearchDocument searchDocument = new SearchDocument(
-//                "1",
-//                "Un séjour actif durant vos vacances La montagne pour terrain de jeu",
-//                "",
-//                "",
-//                "",
-//                "",
-//                ""
-//        );
-
-
-
-
-//        IndexResponse responseadd = esClient.index(i -> i
-//                .index("french_analyzer")
-//                .id(product.getSku())
-//                .document(product)
-//        );
-
-//        AnalyzeRequest analyzeRequest = analyzeRequestBuilder.index("french_analyzer").text("je veux savoir s'il est possible de voir les cacade d'ouzode à partir d'un bateau").build();
-//        AnalyzeResponse analyzeResponse = esClient.indices().analyze(
-//                analyzeRequest
-//        );
         AnalyzeRequest.Builder analyzeRequestBuilder = new AnalyzeRequest.Builder();
 
-        TokenFilter.Builder tokenfb = new TokenFilter.Builder();
-        AnalyzeRequest analyzeRequest = analyzeRequestBuilder.analyzer("french").text("je cherche un bon vélo pour traverser les montagnes du maroc").build();
+        String query = "cascades d'ouzoud";
+        AnalyzeRequest analyzeRequest = analyzeRequestBuilder.analyzer("french").text(query).build();
         AnalyzeResponse analyzeResponse = esClient.indices().analyze(
                 analyzeRequest
         );
@@ -138,56 +154,35 @@ public class ElasticClientController {
         {
             quote=quote+" "+tok.token();
         }
+        AnalyzeRequest.Builder analyzeRequestBuilder2 = new AnalyzeRequest.Builder();
+        AnalyzeRequest analyzeRequest2 = analyzeRequestBuilder2.tokenizer(t->t.name("standard")).filter(t->t.name("ngram")).text(quote).build();
+        AnalyzeResponse analyzeResponse2 = esClient.indices().analyze(
+                analyzeRequest2
+        );
+        for(AnalyzeToken tok : analyzeResponse2.tokens())
+        {
+            quote=quote+" "+tok.token();
+        }
+
         ///////////////////////////////////////////////////////////////////////////////////
 
-//        String quote = "journée au belle cascade d'ouzoud";
-//        for(AnalyzeToken tok: analyzeResponse.tokens())
-//        {
-//            quote=quote+" "+tok.token();
-//        }
-//        System.out.println(quote);
-//
-//
+
         String finalQuote = quote;
         System.out.println(finalQuote);
-//        SearchResponse<SearchDocument> response = esClient.search(s -> s
-//                        .index("voyages")
-//                        .query(q -> q
-//                                .match(t -> t
-//                                        .field("description")
-//                                        .query(finalQuote)
-//                                )
-//                        ),
-//                SearchDocument.class
-//        );
-        SearchResponse<Product> response = esClient.search(s -> s
-                        .index("french_analyzer")
+        SearchResponse<SearchDocument> response = esClient.search(s -> s
+                        .index("voyages")
                         .query(q -> q
                                 .match(t -> t
                                         .field("description")
                                         .query(finalQuote)
                                 )
                         ),
-                Product.class
+                SearchDocument.class
         );
-//
-//
-//        for(Hit h:response.hits().hits())
-//        {
-//            SearchDocument s = (SearchDocument) h.source();
-//            System.out.println("/////////////////////////////////////////////");
-//            System.out.println("City");
-//            System.out.println(s.getCity());
-//            System.out.println("Description");
-//            System.out.println(s.getDescription());
-//            System.out.println("Score");
-//            System.out.println(h.score());
-//
-//        }
 
         for(Hit h:response.hits().hits())
         {
-            Product s = (Product) h.source();
+            SearchDocument s = (SearchDocument) h.source();
             System.out.println("/////////////////////////////////////////////");
             System.out.println("name");
             System.out.println(s.getName());
