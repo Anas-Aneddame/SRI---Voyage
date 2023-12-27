@@ -1,4 +1,3 @@
-
 import { AfterViewInit, Component , ElementRef, NgZone, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FilterComponent } from '../filter/filter.component';
