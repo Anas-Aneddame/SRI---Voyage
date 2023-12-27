@@ -4,10 +4,7 @@
     padding: 16px;
     align-items: center;
   }
-  
-  .section {
-    margin-bottom: 16px;
-  }
+
   
   .input-line {
     display: flex;
@@ -18,7 +15,8 @@
   
   input {
     background-color:rgba(255, 255, 255, 0.1) ;
-    padding: 10px;
+    padding: 5px;
+    margin: 2px;
     height: 30px;
     border-radius: 10px;
     background-color: transparent;
@@ -26,25 +24,49 @@
     outline: none;
     color: #fff;
     font-size: 15px;
-    margin :5px;
-    margin-top: 10px;
     box-sizing: border-box;
   }
+.checkbox {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    
+}
+  
+
+
+
+.checkbox label {
+    display: flex;
+    align-items: center;
+   
+
+}
+
+.checkbox-text {
+    font-size: 16px;
+    padding-top: 7px ;
+    padding-left: 5px;
+    font-weight: normal;
+    
+
+
+}
+   
+  
   
   label {
-    margin: 10px 5px; 
     font-size: 20px ;
     font-weight: Bold;
     letter-spacing: 2px;
+   
+
   }
   select{
-    margin-top: 10px;
     color: white;
   }
   .actions {
     display: flex;
     justify-content: flex-end;
-    margin-top: 16px;
   }
   
   .custom-button {
@@ -81,6 +103,5 @@
         background-color: white;
         color : black; 
         padding: 20px;
-        margin: 10px 0;
         font-size : 20px;
         backdrop-filter: blur(10px);}

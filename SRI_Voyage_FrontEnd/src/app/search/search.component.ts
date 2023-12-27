@@ -21,7 +21,9 @@ export class SearchComponent implements AfterViewInit{
   isExpanded: boolean = false;
   filterData: any;
   isError = false;
-  renderedResults:any[] = []
+  renderedResults:any[] = [];
+  selectedActivities = [];
+
 
 
 
@@ -71,7 +73,9 @@ export class SearchComponent implements AfterViewInit{
         console.log('Dialog closed with  result:', result);
         this.selectedCity = result.selectedCity;
         this.minBudget = result.minBudget;
-        this.maxBudget = result.maxBudget;}
+        this.maxBudget = result.maxBudget;
+        this.selectedActivities = result.selectedActivities;
+      }
       });
     }
 
@@ -84,14 +88,15 @@ export class SearchComponent implements AfterViewInit{
     const searchParams = {
       minBudget: this.minBudget,
       maxBudget: this.maxBudget,
-      selectedCity: this.selectedCity
+      selectedCity: this.selectedCity,
+      selectedActivities : this.selectedActivities
     };
     const headers = {
       'Content-Type': 'application/json'
     };
     const apiUrl = `http://localhost:8090/query/${this.searchQuery}`;
 
-    if (Object.values(searchParams).some(value => value !== undefined && value !== '')) {
+    if (Object.values(searchParams).some(value => value !== undefined && value !== '' &&  (!Array.isArray(value) || value.length > 0)) ) {
       console.log(searchParams);
       this.httpClient.post(apiUrl, searchParams,{headers}).subscribe(
         (response: any) => {
@@ -102,6 +107,7 @@ export class SearchComponent implements AfterViewInit{
           this.minBudget = undefined!;
           this.maxBudget = undefined!;
           this.selectedCity = '';
+          this.selectedActivities=[];
         },
         (error) => {
           console.error('Error fetching search results:', error);
