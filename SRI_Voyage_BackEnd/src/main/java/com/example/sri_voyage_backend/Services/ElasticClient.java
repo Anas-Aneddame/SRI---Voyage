@@ -1,6 +1,7 @@
 package com.example.sri_voyage_backend.Services;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.elasticsearch.indices.AnalyzeRequest;
@@ -53,8 +54,7 @@ public class ElasticClient {
         AnalyzeRequest.Builder analyzeRequestBuilder = new AnalyzeRequest.Builder();
         AnalyzeRequest analyzeRequest = analyzeRequestBuilder.analyzer("french").text(searchtext).build();
         AnalyzeResponse analyzeResponse = null;
-//        System.out.println("query");
-//        System.out.println(elasticsearchClient);
+
         try {
             analyzeResponse = elasticsearchClient.indices().analyze(
                     analyzeRequest
@@ -64,31 +64,28 @@ public class ElasticClient {
             throw new RuntimeException(e);
         }
 
-        StringBuilder stringBuilder=new StringBuilder();
-        for(AnalyzeToken tok : analyzeResponse.tokens())
-        {
-            stringBuilder.append(tok.token()+" ");
-//            analysedSearchText=analysedSearchText+" "+tok.token();
+        //Construct Queries
+        List<Query> queryList = new ArrayList<>();
+        for(AnalyzeToken word : analyzeResponse.tokens()) {
+            queryList.add(Query.of(sh->sh.fuzzy(f->f.field("description").value(word.token()))));
+            queryList.add(Query.of(sh->sh.fuzzy(f->f.field("name").value(word.token()))));
+            queryList.add(Query.of(sh->sh.fuzzy(f->f.field("city").value(word.token()))));
         }
-        
-        String finalAnalysedSearchText = stringBuilder.toString();
+
         SearchResponse<SearchDocument> response = null;
         try {
             response = elasticsearchClient.search(s -> s
                             .index("voyage")
-                            .query(q -> q
-                                    .match(t -> t
-                                            .field("description")
-                                            .query(finalAnalysedSearchText)
-                                    )
+                            .query(q -> q.bool(
+                                    b->b.should(
+                                            queryList
+                                    ))
                             ),
                     SearchDocument.class
             );
         } catch (IOException e) {
-            System.out.println("Error with search");
             throw new RuntimeException(e);
         }
-
 
         List<SearchDocument> searchDocumentList=new ArrayList<>();
 
