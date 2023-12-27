@@ -23,6 +23,8 @@ export class SearchComponent implements AfterViewInit{
     'video':'../../assets/video.svg',
   }
 
+  isDocImg = (doc:any)=>doc.type==='image'
+
 
   ngAfterViewInit(): void {
     const inputEl = document.getElementById('search-input')

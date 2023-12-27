@@ -206,6 +206,7 @@ h1{
 .result-info{
   width: 75%;
   padding: 1rem 2rem;
+  align-self: center;
 }
 .results-data{
   
@@ -245,9 +246,19 @@ h1{
   margin: 0.3rem;
   align-self: center;
 }
+.res-img{
+  height: 100%;
+  width: 20rem;
+  border-radius: 15px 0 0 15px;
+  object-fit: cover;
+  margin: 0;
+}
 .result-type{
   display: flex;
   min-height: 100%;
   background-color: white;
   border-radius: 15px 0 0 15px;
+}
+.res-img-info{
+  width: 45%;
 }
