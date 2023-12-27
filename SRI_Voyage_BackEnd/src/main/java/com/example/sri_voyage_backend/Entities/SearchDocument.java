@@ -23,5 +23,6 @@ public class SearchDocument {
     private String link;
     private String description;
     private String type;
+    private String imageLink;
     private String score;
 }

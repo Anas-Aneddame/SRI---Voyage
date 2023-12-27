@@ -192,6 +192,78 @@ public class ElasticSearchController {
                         .activities(List.of("Tennis","Plage","Salle de Sport","Hammam","Sauna","Basket Ball","Football","Handball","Piscine","Centre de Bien-Etre"))
                         .description("Des vacances décontractées avec du sport, de la culture, de la détente ou du farniente, faites vos jeux ! Les vacances club en famille, entre amis, à prix malin ! ")
                         .link("https://www.youtube.com/watch?v=1t99jtpn_XU")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("011")
+                        .type("image")
+                        .name("Les vacances toniques L'Atlantique comme aire de jeu")
+//                        .city("Agadir")
+//                        .price(3900D)
+//                        .duration(String.valueOf(0))
+                        .imageLink("https://www.visitmorocco.com/sites/default/files/thumbnails/image/Catamaran_0.jpg")
+                        .description("Bordée par l'océan, toute l'année baignée de soleil, Agadir est la capitale du tourisme balnéaire marocain. Sa situation privilégiée, ses nombreux hôtels et centres de loisirs, leurs infrastructures modernes et variés sont autant d'opportunités de vous dépenser. Saisissez-les et adonnez-vous à votre sport favori au milieu de superbes paysages!\n" +
+                                "La ville fait la part belle aux activités nautiques. L'Atlantique, battu par les vents, est un terrain de jeu parfait pour les surfeurs. Amateurs de glisse, vous vous plairez à profiter des vagues de Taghazout, à l'origine un petit village de pêcheurs à quelques kilomètres d'Agadir et qui aujourd'hui comporte une station balnéaire aux standards internationaux. Dans ses environs, \"Killer Point\" et \"Anchor point\" sont des spots que prisent les surfeurs les plus expérimentés.\n" +
+                                "Dans la baie d'Agadir proprement dite, les eaux sont plus calmes. Les enfants peuvent y batifoler en toute sécurité, les nageurs tranquillement s'aventurer au large. Sur les plages, les activités sont variées : sortie en jet-ski, voile, parachute ascensionnel vous donnent l'occasion d'assouvir votre soif de sensations fortes !\n" +
+                                "Entre les eaux tranquilles de la baie ou celles, plus tumultueuses, de Taghazout, l'Atlantique des environs d'Agadir vous réserve son lot de loisirs et d'émotions !\n")
+                        .link("https://www.visitmorocco.com/fr/voyage/agadir-taghazout")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("012")
+                        .type("image")
+                        .name("visiter agadir la ville de la baie")
+                        .city("Agadir")
+//                        .price(3900D)
+//                        .duration(String.valueOf(0))
+                        .imageLink("https://levoyageducalao.com/wp-content/uploads/2023/05/plage-chameaux-agadir-maroc-1536x1152.jpg")
+                        .description("Fort de son statut de première station balnéaire du Maroc, Agadir est connue pour ses plages de sable fin, ses vagues déferlantes et ses hôtels-club. Je vous avoue que c’était bien l’image que j’en avais avant d’y passer une semaine. Raison pour laquelle d’ailleurs je n’étais pas particulièrement attirée par cette destination de tourisme de masse balnéaire.\n" +
+                                "Mais comme souvent, cette ville touristique est bien plus que l’image qu’elle renvoie si on se donne la peine de sortir de son hôtel, partir à l’aventure et aller à la rencontre des Berbères qui la peuplent.\n" +
+                                "Ce voyage à Agadir était un peu atypique pour moi. Je ne suis pas une adepte des voyages sédentaires, je suis plutôt accroc au road-trip mais pour une fois, j’ai « lâché du lest » car ma petite famille avait envie et besoin de se poser et ne pas vivre au rythme infernal de ma soif de découvertes. Nous avons donc séjourné pendant 10 jours dans le même hôtel. Incroyable mais vrai, mes garçons n’y croyaient pas quand je leur ai annoncé la nouvelle \n" +
+                                "Évidemment, ces 10 jours n’ont pas uniquement été consacré à du farniente sur un transat (dans la mesure où je tiens à peu près 10 minutes sans rien faire …). Nous avons alterné moment de détente et visite à un rythme tranquille qui nous a permis d’apprécier Agadir dans toute son entièreté. Un voyage en mode slow-tourism, aussi particulièrement adapté aux familles avec des enfants en bas âge\n")
+                        .link("https://levoyageducalao.com/afrique/visiter-agadir-la-ville-de-la-baie/")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("013")
+                        .type("image")
+                        .name("Nos 2 idées de voyage « Taroudant »")
+                        .city("Taroudant")
+//                        .price(3900D)
+//                        .duration(String.valueOf(0))
+                        .imageLink("https://photo.comptoir.fr/asset/mot-cle/949/taroudant-maroc-662611-1440x670.jpg")
+                        .description("Surnommée la \"petite Marrakech\", Taroudant est encerclée de remparts en pisé à l’intérieur desquels se trouvent une médina et des souks très animés. Historique et authentique, Taroudant est une cité chaleureuse très appréciée pour son artisanat lors d’un voyage dans le Sud marocain. En plus des objets berbères et des bijoux en argent, la ville est aussi connue pour ses tanneurs, réputés pour leur habileté. Outre les traditionnelles peaux de mouton et de chèvres, celles d’animaux plus rares, comme le renard et le dromadaire, y sont aussi travaillées.")
+                        .link("https://www.comptoirdesvoyages.fr/voyage-tag/taroudant/949")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("014")
+                        .type("image")
+                        .name("Guide voyage Taroudant")
+                        .city("Taroudant")
+//                        .price(3900D)
+//                        .duration(String.valueOf(0))
+                        .imageLink("https://media.routard.com/image/38/7/pt91567.1300387.w630.jpg")
+                        .description("Taroudant, à 80 km d’Agadir, est une ville pittoresque, protégée par de superbes remparts de couleur ocre qui valent presque à eux seuls le déplacement. Cette ancienne capitale du Sous possède aussi une petite médina et des souks modestes mais intéressants. Un peu d’artisanat, même s’il n’a pas ici la créativité de celui de Marrakech. Taroudant recèle également une kasbah au nord-est des remparts, en face de jolis jardins. \n")
+                        .link("https://www.routard.com/guide_voyage_lieu/4337-taroudant.htm")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("015")
+                        .type("image")
+                        .name("Voyage Chefchaouen")
+                        .city("Chefchaouen")
+//                        .price(3900D)
+//                        .duration(String.valueOf(0))
+                        .imageLink("https://www.marguerite-et-troubadour.fr/wp-content/uploads/2016/11/P1140853.jpg")
+                        .description("Je vous retrouve aujourd’hui pour vous raconter l’avant-dernière étape de mon road-trip au Maroc. Après Marrakech et Fès, en ce septième jour de voyage, Celia et moi mettons le cap sur Chefchaouen. Chefchaouen, ou Chaouen – c’est son p’tit nom – est une ville pas plus grande qu’un mouchoir de poche. Elle se situe au Nord du pays, à deux heures de Tanger, tranquillement installée à flanc de montagne. Mais si Chefchaouen est aussi réputée, c’est pour sa Médina bleue, mélange d’influences hispaniques, juives et arabes.")
+                        .link(" https://www.marguerite-et-troubadour.fr/voyage-chefchaouen/")
+                        .build(),
+                new SearchDocument().builder()
+                        .id("016")
+                        .type("image")
+                        .name("Chefchaouen")
+                        .city("Chefchaouen")
+//                        .price(3900D)
+//                        .duration(String.valueOf(0))
+                        .imageLink("A deux heures 30 de route au sud est de Tanger, Chefchaouen ou « Chaouen » pour les intimes se niche à 600 m d’altitude sur les contreforts glorieux des montagnes du Rif. Ce grand village pittoresque, magnétique et mystérieux, inscrit au Patrimoine immatériel de l’humanité de l’UNESCO, abrite l’une des médinas les plus charmantes du Maroc réputée pour son architecture céruléenne, avec ses maisons et ses commerces aux multiples teintes bleutées. Se perdre dans ses ruelles étroites d'une grande propreté est un réel plaisir. On ne peut s’empêcher au détour d'un virage de prendre en photo les jolies portes de maisons recouvertes du célèbre pigment bleu que l'on retrouve au marché et qui suscite la joie des aquarellistes. Dans ses nombreuses boutiques, on trouve un artisanat local de qualité, des vêtements de laine, des couvertures tissées et des tapis à un prix raisonnable. Chefchaouen est aussi connue pour son fromage de chèvre local. Située sur la place de Outa El-Hamman, l'impressionnante Kasbah, ocre vestige d’un passé révolu, est une invitation à laisser défiler les heures.\n")
+                        .description("Je vous retrouve aujourd’hui pour vous raconter l’avant-dernière étape de mon road-trip au Maroc. Après Marrakech et Fès, en ce septième jour de voyage, Celia et moi mettons le cap sur Chefchaouen. Chefchaouen, ou Chaouen – c’est son p’tit nom – est une ville pas plus grande qu’un mouchoir de poche. Elle se situe au Nord du pays, à deux heures de Tanger, tranquillement installée à flanc de montagne. Mais si Chefchaouen est aussi réputée, c’est pour sa Médina bleue, mélange d’influences hispaniques, juives et arabes.")
+                        .link("https://www.petitfute.com/v46100-chefchaouen-91000/")
                         .build()
         );
 
