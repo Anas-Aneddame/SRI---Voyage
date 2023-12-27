@@ -35,11 +35,11 @@
       </div>
       <div class="results">
         <div *ngFor="let result of renderedResults" class="result">
-          <a class="result-type" href="{{isDocImg(result)?result.imageLink:'#'}}">
+          <a class="result-type" target="_blank" href="{{isDocImg(result)?result.imageLink:'#'}}">
             <img class="doctype-icon" [ngClass]="{'res-img':isDocImg(result)}" src="{{ isDocImg(result)? result.imageLink :docTypesIcons[result.type]}}" alt="" srcset="">
           </a>
           <div class="result-info" [ngClass]="{'res-img-info':isDocImg(result)===true}">
-            <a href="{{result.link}}" class="result-title">{{result.name}}</a>
+            <a href="{{result.link}}" target="_blank" class="result-title">{{result.name}}</a>
             <p class="description" >{{result.description}}</p>
           </div>
           <div class="result-score">
