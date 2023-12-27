@@ -178,3 +178,15 @@ h1{
   min-height: 10px;
   min-width: 10px;
 }
+.error-msg{
+  padding: 1rem;
+  border-radius: 15px;
+  background-color: none;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgb(226, 226, 0);
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: rgb(226, 226, 0);
+  font-family: century gothic;
+}

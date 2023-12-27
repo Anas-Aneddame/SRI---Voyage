@@ -70,7 +70,12 @@ export class SearchComponent {
         console.log('Dialog closed with result:', result);
       });
     }
+  isError = false;
   search() {
+    if(!this.searchQuery){
+      this.isError = true;
+      setTimeout(()=>this.isError=false,2000)
+    }
     // Effectuez la requête HTTP vers votre backend Spring Boot
     const apiUrl = `http://localhost:8090/query/${this.searchQuery}`;
 
