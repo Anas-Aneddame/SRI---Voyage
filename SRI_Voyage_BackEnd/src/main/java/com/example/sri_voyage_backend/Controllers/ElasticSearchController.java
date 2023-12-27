@@ -434,7 +434,7 @@ public class ElasticSearchController {
                         .type("webpage")
                         .name("Le Parachutisme au Maroc à Beni Mellal")
                         .city("Beni Mellal")
-                        .activities(List.of("Parachitismr"))
+                        .activities(List.of("Parachitisme"))
 //                        .price(860D)
 //                        .duration(String.valueOf(0))
                         .description("Le Saut en Tandem\n" +
