@@ -19,6 +19,7 @@
 .search-logo{
   transition: opacity 0.3s,margin-bottom 0.3s,transform 0.3s;
   height: 5rem;
+  font-weight: bolder;
 }
 .expanded{
   height: 7rem;
