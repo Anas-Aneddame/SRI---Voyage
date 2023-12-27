@@ -2,8 +2,7 @@
   <div class="search-container"  [ngClass]="{'expanded': isExpanded}">
       <h1 class="search-logo" [ngClass]="{'logo-hidden':isExpanded}">GOOGLE</h1>
       <div class="search-box" [ngClass]="{'input-focused':isExpanded}">
-        <input #searchInput id="search-input" type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchQuery"  (focus)="expandContainer()" (blur)="undoExpand()" />
-        <button class="search-btns" ><img src="../../assets/keyboard.png"></button>
+        <input #searchInput (keyup.enter)="search()" id="search-input" type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchQuery"  (focus)="expandContainer()" (blur)="undoExpand()" />
         <button class="search-btns" (click)="search()"><img src="../../assets/search.png"></button>
         <button class="search-btns" (click)="openPopup()" ><img src="../../assets/filtre.png"></button>
         <button class="search-btns" [ngClass]="{'close-icon-hidden':!isQueryFilled()}" (click)="handleDeleteQuery()">
