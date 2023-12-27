@@ -60,11 +60,11 @@ public class ElasticClientController {
         propertyMap.put("description", new Property.Builder().text(t->t.analyzer("french")).build());
         propertyMap.put("type", new Property.Builder().text(t->t.analyzer("french")).build());
 
-//        CreateIndexResponse responseAnalyser = esClient.indices().create(
-//                i-> i.index("voyage")
-//                        .mappings(
-//                        m->m.properties(propertyMap)
-//                        ));
+        CreateIndexResponse responseAnalyser = esClient.indices().create(
+                i-> i.index("voyage")
+                        .mappings(
+                        m->m.properties(propertyMap)
+                        ));
 
         List<SearchDocument> searchDocumentList=List.of(
                 new SearchDocument().builder()

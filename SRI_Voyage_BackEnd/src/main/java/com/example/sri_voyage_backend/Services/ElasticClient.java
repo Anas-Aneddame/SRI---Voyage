@@ -21,6 +21,7 @@ import lombok.Setter;
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.message.BasicHeader;
+import org.apache.tomcat.util.buf.StringUtils;
 import org.elasticsearch.client.RestClient;
 import org.springframework.stereotype.Service;
 
@@ -100,6 +101,17 @@ public class ElasticClient {
             )._toQuery();
             queryFilterList.add(byMaxPrice);
         }
+        if(searchFilter.getSelectedActivities()!=null)
+        {
+
+            String activityString =  StringUtils.join(searchFilter.getSelectedActivities(), ' ');
+            System.out.println();
+            Query byActivitis = MatchQuery.of(m -> m
+                    .field("activities")
+                    .query(activityString)
+            )._toQuery();
+            queryFilterList.add(byActivitis);
+        }
 
 
         SearchResponse<SearchDocument> response = null;
@@ -129,16 +141,6 @@ public class ElasticClient {
             SearchDocument s = (SearchDocument) h.source();
             s.setScore(String.valueOf(h.score()));
             searchDocumentList.add(s);
-            System.out.println("/////////////////////////////////////////////");
-            System.out.println("Score");
-            System.out.println(h.source());
-            System.out.println("Price");
-            System.out.println(s.getPrice());
-            System.out.println("Activities");
-            System.out.println(s.getActivities());
-
-            System.out.println(h.score());
-
         }
 
         searchDocumentList.sort((a,b)->
@@ -166,7 +168,7 @@ public class ElasticClient {
         List<Query> queryList = new ArrayList<>();
         for(AnalyzeToken word : analyzeResponse.tokens()) {
             queryList.add(Query.of(sh->sh.fuzzy(f->f.field("description").value(word.token()))));
-            queryList.add(Query.of(sh->sh.fuzzy(f->f.field("name").value(word.token()))));
+            queryList.add(Query.of(sh->sh.fuzzy(f->f.field("activities").value(word.token()))));
             queryList.add(Query.of(sh->sh.fuzzy(f->f.field("name").value(word.token()))));
             queryText = queryText+" ";
 
@@ -198,16 +200,6 @@ public class ElasticClient {
             SearchDocument s = (SearchDocument) h.source();
             s.setScore(String.valueOf(h.score()));
             searchDocumentList.add(s);
-            System.out.println("/////////////////////////////////////////////");
-            System.out.println("Score");
-            System.out.println(h.source());
-            System.out.println("Price");
-            System.out.println(s.getPrice());
-            System.out.println("Activities");
-            System.out.println(s.getActivities());
-
-            System.out.println(h.score());
-
         }
 
         searchDocumentList.sort((a,b)->
