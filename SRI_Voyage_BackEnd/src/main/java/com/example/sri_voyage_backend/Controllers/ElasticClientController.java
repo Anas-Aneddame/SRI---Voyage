@@ -5,6 +5,7 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.analysis.*;
 import co.elastic.clients.elasticsearch._types.mapping.Property;
 import co.elastic.clients.elasticsearch._types.query_dsl.Operator;
+import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch.core.IndexResponse;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
@@ -142,7 +143,7 @@ public class ElasticClientController {
 
         AnalyzeRequest.Builder analyzeRequestBuilder = new AnalyzeRequest.Builder();
 
-        String query = "cascades d'ouzoud";
+        String query = "cascades d'ouzoud excursion";
         AnalyzeRequest analyzeRequest = analyzeRequestBuilder.analyzer("french").text(query).build();
         AnalyzeResponse analyzeResponse = esClient.indices().analyze(
                 analyzeRequest
@@ -153,31 +154,39 @@ public class ElasticClientController {
         {
             quote=quote+" "+tok.token();
         }
-        AnalyzeRequest.Builder analyzeRequestBuilder2 = new AnalyzeRequest.Builder();
-        AnalyzeRequest analyzeRequest2 = analyzeRequestBuilder2.tokenizer(t->t.name("standard")).filter(t->t.name("ngram")).text(quote).build();
-        AnalyzeResponse analyzeResponse2 = esClient.indices().analyze(
-                analyzeRequest2
-        );
-        for(AnalyzeToken tok : analyzeResponse2.tokens())
-        {
-            quote=quote+" "+tok.token();
-        }
+//        AnalyzeRequest.Builder analyzeRequestBuilder2 = new AnalyzeRequest.Builder();
+//        AnalyzeRequest analyzeRequest2 = analyzeRequestBuilder2.tokenizer(t->t.name("standard")).filter(t->t.name("ngram")).text(quote).build();
+//        AnalyzeResponse analyzeResponse2 = esClient.indices().analyze(
+//                analyzeRequest2
+//        );
+//        for(AnalyzeToken tok : analyzeResponse2.tokens())
+//        {
+//            quote=quote+" "+tok.token();
+//        }
 
         ///////////////////////////////////////////////////////////////////////////////////
 
 
         String finalQuote = quote;
         System.out.println(finalQuote);
+
+        List<Query> queryList = new ArrayList<>();
+        for(AnalyzeToken tok : analyzeResponse.tokens())
+        {
+            queryList.add(Query.of(sh->sh.fuzzy(f->f.field("description").value(tok.token()))));
+            queryList.add(Query.of(sh->sh.fuzzy(f->f.field("name").value(tok.token()))));
+
+        }
         SearchResponse<SearchDocument> response = esClient.search(s -> s
-                        .index("voyages")
-                        .query(q -> q
-                                .match(t -> t
-                                        .field("description")
-                                        .query(finalQuote)
-                                )
+                        .index("voyage")
+                        .query(q -> q.bool(
+                                b->b.should(
+                                        queryList
+                                ))
                         ),
                 SearchDocument.class
         );
+        System.out.println(response);
 
         for(Hit h:response.hits().hits())
         {
