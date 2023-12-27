@@ -147,6 +147,7 @@ export class SearchComponent implements AfterViewInit{
     this.zone.run(() => {
       this.searchQuery = "";
       this.isExpanded = false;
+      this.areResultsRendered = false;
     });
   }
 
