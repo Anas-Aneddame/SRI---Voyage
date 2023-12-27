@@ -13,7 +13,7 @@ export class FilterComponent {
   minBudget!: number  ;
   maxBudget!: number;
   cities: string[] = ['Marrakech', 'Rabat', 'Casablanca'];
-  selectedCity: string = '';
+  selectedCity!: string ;
 
 
 

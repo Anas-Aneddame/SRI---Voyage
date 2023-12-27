@@ -83,7 +83,7 @@ public class ElasticClient {
 
         List<Query> queryFilterList =  new ArrayList<>();
 
-        if(searchFilter.getSelectedCity()!=null)
+        if(searchFilter.getSelectedCity()!=null && searchFilter.getSelectedCity()!=null)
         {
             Query byName = MatchQuery.of(m -> m
                     .field("city")
