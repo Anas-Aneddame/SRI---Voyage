@@ -15,6 +15,7 @@ import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
 import com.example.sri_voyage_backend.Entities.SearchDocument;
+import com.example.sri_voyage_backend.Entities.SearchFilter;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.http.Header;
@@ -26,6 +27,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Getter
@@ -54,7 +56,7 @@ public class ElasticClient {
 //        return esClient;
     }
 
-    public List<SearchDocument> queryDocument(String searchtext)  {
+    public List<SearchDocument> queryDocument(String searchtext, Optional<SearchFilter> searchFilter)  {
         AnalyzeRequest.Builder analyzeRequestBuilder = new AnalyzeRequest.Builder();
         AnalyzeRequest analyzeRequest = analyzeRequestBuilder.analyzer("french").text(searchtext).build();
         AnalyzeResponse analyzeResponse = null;
@@ -67,27 +69,40 @@ public class ElasticClient {
             System.out.println("Error with Analyzer");
             throw new RuntimeException(e);
         }
-
+        String queryText = "";
         //Construct Queries
         List<Query> queryList = new ArrayList<>();
         for(AnalyzeToken word : analyzeResponse.tokens()) {
             queryList.add(Query.of(sh->sh.fuzzy(f->f.field("description").value(word.token()))));
-            queryList.add(Query.of(sh->sh.fuzzy(f->f.field("name").value(word.token()))));
-            queryList.add(Query.of(sh->sh.fuzzy(f->f.field("city").value(word.token()))));
             queryList.add(Query.of(sh->sh.fuzzy(f->f.field("activities").value(word.token()))));
+            queryList.add(Query.of(sh->sh.fuzzy(f->f.field("name").value(word.token()))));
+            queryText = queryText+" ";
 
         }
+        String city;
+        String maxBudget;
 
+        if(searchFilter.isPresent()) {
+            city = searchFilter.get().getSelectedCity();
+            maxBudget = searchFilter.get().getMaxBudget();
+        }
+        else{
+            city="";
+            maxBudget="";
+        }
         Query byName = MatchQuery.of(m -> m
                 .field("city")
-                .query("marrakech")
+                .query(city)
         )._toQuery();
+//            Query byActicities = MatchQuery.of(m -> m
+//                    .field("activities")
+//                    .query("handball Hammam")
+//            )._toQuery();
 
         Query byMaxPrice = RangeQuery.of(r -> r
                 .field("price")
-                .lte(JsonData.of(190.0))
+                .lte(JsonData.of(maxBudget))
         )._toQuery();
-
         SearchResponse<SearchDocument> response = null;
         try {
             response = elasticsearchClient.search(s -> s
@@ -95,7 +110,7 @@ public class ElasticClient {
                             .query(q -> q.bool(
                                     b->b.should(
                                             queryList
-                                    ).must(byMaxPrice,byName))
+                                    ).filter(byName))
                             ),
                     SearchDocument.class
             );
@@ -117,6 +132,8 @@ public class ElasticClient {
             System.out.println(h.source());
             System.out.println("Price");
             System.out.println(s.getPrice());
+            System.out.println("Activities");
+            System.out.println(s.getActivities());
 
             System.out.println(h.score());
 

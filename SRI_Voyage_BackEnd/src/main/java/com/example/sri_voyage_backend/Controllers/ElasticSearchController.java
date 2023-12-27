@@ -1,12 +1,14 @@
 package com.example.sri_voyage_backend.Controllers;
 
 import com.example.sri_voyage_backend.Entities.SearchDocument;
+import com.example.sri_voyage_backend.Entities.SearchFilter;
 import com.example.sri_voyage_backend.Services.ElasticClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("http://localhost:4200/")
@@ -19,8 +21,16 @@ public class ElasticSearchController {
     @GetMapping("/query/{searchtext}")
     public List<SearchDocument> query(@PathVariable String searchtext){
 
-        return this.elasticClient.queryDocument(searchtext);
+
+        return this.elasticClient.queryDocument(searchtext,Optional.of(new SearchFilter()));
     }
+    @PostMapping("/query/{searchtext}")
+    public List<SearchDocument> query(@PathVariable String searchtext,@RequestBody(required = false)SearchFilter searchFilter){
+        System.out.println(searchFilter);
+
+        return this.elasticClient.queryDocument(searchtext, Optional.of(searchFilter));
+    }
+
 
     @GetMapping("/addDocs")
     public List<SearchDocument> addDocs(){
