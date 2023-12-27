@@ -1,4 +1,4 @@
-import { AfterViewInit, Component , ElementRef, NgZone, ViewChild } from '@angular/core';
+import { AfterContentChecked, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component , DoCheck, ElementRef, NgZone, OnChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FilterComponent } from '../filter/filter.component';
 import { HttpClient } from '@angular/common/http';
@@ -21,7 +21,10 @@ export class SearchComponent implements AfterViewInit{
   isExpanded: boolean = false;
   filterData: any;
   isError = false;
+  selectedActivities = [];
+
   renderedResults:any[] = []
+  areResultsRendered = false;
 
 
 
@@ -38,9 +41,10 @@ export class SearchComponent implements AfterViewInit{
 
 
   ngAfterViewInit(): void {
-    const inputEl = document.getElementById('search-input')
-    console.log(inputEl)
-    this.searchQuery = this.searchInput.nativeElement.value
+    setTimeout(()=>{
+      console.log(this.searchInput?.nativeElement.value);
+      this.searchQuery = this.searchInput.nativeElement.value
+    },500)
   }
 
 
@@ -54,6 +58,10 @@ export class SearchComponent implements AfterViewInit{
     this.isExpanded = false;
   }
 
+  handleQueryChange(event:any){
+    console.log("handleQueryChange()");
+    this.areResultsRendered = false;
+  }
 
 
 
@@ -71,7 +79,9 @@ export class SearchComponent implements AfterViewInit{
         console.log('Dialog closed with  result:', result);
         this.selectedCity = result.selectedCity;
         this.minBudget = result.minBudget;
-        this.maxBudget = result.maxBudget;}
+        this.maxBudget = result.maxBudget;
+        this.selectedActivities = result.selectedActivities;
+      }
       });
     }
 
@@ -84,17 +94,21 @@ export class SearchComponent implements AfterViewInit{
     const searchParams = {
       minBudget: this.minBudget,
       maxBudget: this.maxBudget,
-      selectedCity: this.selectedCity
+      selectedCity: this.selectedCity,
+      selectedActivities : this.selectedActivities
     };
     const headers = {
       'Content-Type': 'application/json'
     };
     const apiUrl = `http://localhost:8090/query/${this.searchQuery}`;
 
-    if (Object.values(searchParams).some(value => value !== undefined && value !== '')) {
+    if (Object.values(searchParams).some(value => value !== undefined && value !== '' &&  (!Array.isArray(value) || value.length > 0)) ) {
+    
+
       console.log(searchParams);
       this.httpClient.post(apiUrl, searchParams,{headers}).subscribe(
         (response: any) => {
+          this.areResultsRendered = true;
           this.results = response;
           this.renderedResults = this.results;
           this.changeSelectedDocType('all');
@@ -102,17 +116,19 @@ export class SearchComponent implements AfterViewInit{
           this.minBudget = undefined!;
           this.maxBudget = undefined!;
           this.selectedCity = '';
+          this.selectedActivities=[];
         },
         (error) => {
           console.error('Error fetching search results:', error);
         }
-      );
-    } else {
-
-    
-    this.httpClient.get(apiUrl).subscribe(
-      (response: any) => {
-        this.results = response;
+        );
+      } else {
+        
+        
+        this.httpClient.get(apiUrl).subscribe(
+          (response: any) => {
+            this.areResultsRendered = true;
+            this.results = response;
         this.renderedResults = this.results
         this.changeSelectedDocType('all')
         console.log('Search results:', this.results);

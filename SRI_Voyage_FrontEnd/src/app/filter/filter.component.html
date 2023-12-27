@@ -17,6 +17,17 @@
         </select>
     </div>
     </div>
+    <div class="checkbox-class">
+        <label>Activities</label>
+        <div class="checkbox">
+          <div *ngFor="let activity of activities">
+            <label>
+              <input  type="checkbox" [(ngModel)]="activity.selected" (change)="onActivitySelectionChange(activity)" />
+              <p class="checkbox-text">{{ activity.name }}</p>
+            </label>
+          </div>
+        </div>
+      </div>
   
     <div class="actions">
       <button mat-button (click)="onNoClick()" class="custom-button">Cancel</button>
