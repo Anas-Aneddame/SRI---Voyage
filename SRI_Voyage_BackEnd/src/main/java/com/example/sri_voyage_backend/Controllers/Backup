@@ -11,7 +11,6 @@ import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
 import co.elastic.clients.util.ObjectBuilder;
-import com.example.sri_voyage_backend.Entities.Product;
 import com.example.sri_voyage_backend.Entities.SearchDocument;
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
