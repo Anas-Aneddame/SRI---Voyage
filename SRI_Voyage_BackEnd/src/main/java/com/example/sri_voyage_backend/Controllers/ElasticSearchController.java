@@ -183,7 +183,7 @@ public class ElasticSearchController {
 //                        .duration(String.valueOf(0))
                         .activities(List.of("Salle de sport","Tennis de Table","Piscine","Piscine Couverte","Aquapark"))
                         .description("De beaux paysages, un accueil chaleureux, une cuisine au top et des animations pour des vacances inoubliables, c'est l'engagement de nos clubs Framisssima ! ")
-                        .link("https://www.youtube.com/watch?v=1t99jtpn_XU")
+                        .link("https://www.promovacances.com/hotel-framissima-les-idrissides-aqua-parc/maroc-marrakech-48953.html#809441")
                         .build(),
                 new SearchDocument().builder()
                         .id("010")
@@ -194,7 +194,7 @@ public class ElasticSearchController {
 //                        .duration(String.valueOf(0))
                         .activities(List.of("Tennis","Plage","Salle de Sport","Hammam","Sauna","Basket Ball","Football","Handball","Piscine","Centre de Bien-Etre"))
                         .description("Des vacances décontractées avec du sport, de la culture, de la détente ou du farniente, faites vos jeux ! Les vacances club en famille, entre amis, à prix malin ! ")
-                        .link("https://www.youtube.com/watch?v=1t99jtpn_XU")
+                        .link("https://www.promovacances.com/hotel-jumbo-kenzi-europa/maroc-agadir-57301.html#1267117")
                         .build(),
                 new SearchDocument().builder()
                         .id("011")
@@ -255,7 +255,7 @@ public class ElasticSearchController {
 //                        .duration(String.valueOf(0))
                         .imageLink("https://www.marguerite-et-troubadour.fr/wp-content/uploads/2016/11/P1140853.jpg")
                         .description("Je vous retrouve aujourd’hui pour vous raconter l’avant-dernière étape de mon road-trip au Maroc. Après Marrakech et Fès, en ce septième jour de voyage, Celia et moi mettons le cap sur Chefchaouen. Chefchaouen, ou Chaouen – c’est son p’tit nom – est une ville pas plus grande qu’un mouchoir de poche. Elle se situe au Nord du pays, à deux heures de Tanger, tranquillement installée à flanc de montagne. Mais si Chefchaouen est aussi réputée, c’est pour sa Médina bleue, mélange d’influences hispaniques, juives et arabes.")
-                        .link(" https://www.marguerite-et-troubadour.fr/voyage-chefchaouen/")
+                        .link("https://www.marguerite-et-troubadour.fr/voyage-chefchaouen/")
                         .build(),
                 new SearchDocument().builder()
                         .id("016")
@@ -304,7 +304,7 @@ public class ElasticSearchController {
                         .id("020")
                         .type("webpage")
                         .name("Week-End Asilah - Tanger À Seulement 860 DHs| Plusieurs Départs Disponibles")
-                        .city("Agadir")
+                        .city("Tanger")
                         .price(860D)
 //                        .duration(String.valueOf(0))
                         .description("Départ de Casablanca devant la gare « Casa voyageurs »\n" +
@@ -427,7 +427,7 @@ public class ElasticSearchController {
                                 "Que vous soyez un surfeur chevronné ou un débutant, Taghazout propose une large gamme de spots de surf adaptés à tous les niveaux d'expertise. Avec des habitants accueillants, une cuisine délicieuse et une atmosphère décontractée, il n'est pas étonnant que Taghazout soit devenu un havre pour les amateurs de surf du monde entier.\n" +
                                 "\n" +
                                 "Alors, pourquoi ne pas préparer votre planche, enfiler une combinaison et explorer la scène du surf dans ce joyau caché sur la côte marocaine ? Vous ne le regretterez pas.")
-                        .link("https://www.youtube.com/watch?v=dN_h7SekMSc")
+                        .link("https://www.bestsurfdestinations.com/surfing-taghazout/")
                         .build(),
                 new SearchDocument().builder()
                         .id("029")
