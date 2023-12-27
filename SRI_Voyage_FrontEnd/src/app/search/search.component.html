@@ -2,7 +2,7 @@
   <div class="search-container"  [ngClass]="{'expanded': isExpanded}">
       <h1 class="search-logo" [ngClass]="{'logo-hidden':isExpanded}">GOOGLE</h1>
       <div class="search-box" [ngClass]="{'input-focused':isExpanded}">
-        <input #searchInput id="search-input" type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchQuery"  (focus)="expandContainer()" (blur)="undoExpand()" />
+        <input #searchInput id="search-input" type="text" class="search-input" placeholder="Rechercher..." [(ngModel)]="searchQuery"  (focus)="expandContainer()" (blur)="undoExpand()" />
         <button class="search-btns" ><img src="../../assets/keyboard.png"></button>
         <button class="search-btns" (click)="search()"><img src="../../assets/search.png"></button>
         <button class="search-btns" (click)="openPopup()" ><img src="../../assets/filtre.png"></button>
@@ -12,23 +12,30 @@
           </svg>
         </button>
       </div>
-      <div class="error-msg" *ngIf="isError">Your search result is empty</div>
+      <div class="error-msg" *ngIf="isError">Veuillez tapez des mots clés pour commencer</div>
       
       
       <div class="footer-links">
           <a routerLink="/aboutUs" class="footer-link">À propos</a>
           <div class="footer-links-right">
-              <a href="#" class="footer-link">Confidentialite</a>
+              <a href="#" class="footer-link">Confidentialité</a>
               <a href="#" class="footer-link">Conditions</a>
           </div>
       </div>
   </div>
+  <!--webpage - video - ...-->
   <div *ngIf="isExpanded" class="results-container">
-    <div *ngIf="!searchQuery.length" class="help-text"><span>Please type a keyword to start searching</span></div>
+    <div *ngIf="!searchQuery.length" class="help-text"><span>Commencer à rechercher des endroits, vous pouvez filtrer les résultats.</span></div>
     <div *ngIf="searchQuery.length" class="results-data">
-      <h2 class="results-title">Results ({{results.length}})</h2>
+      <div class="results-header">
+        <h2 class="results-title">Results ({{results.length}})</h2>
+        <button class="filter-option" [ngClass]="{'selected-option':selectedDocType==='all'}" (click)="changeSelectedDocType('all')">All</button>
+        <button class="filter-option" [ngClass]="{'selected-option':selectedDocType==='webpage'}" (click)="changeSelectedDocType('webpage')">Web</button>
+        <button class="filter-option" [ngClass]="{'selected-option':selectedDocType==='image'}" (click)="changeSelectedDocType('image')">Images</button>
+        <button class="filter-option" [ngClass]="{'selected-option':selectedDocType==='video'}" (click)="changeSelectedDocType('video')">Videos</button>
+      </div>
       <div class="results">
-        <div *ngFor="let result of results" class="result">
+        <div *ngFor="let result of renderedResults" class="result">
           <div class="result-info">
             <a href="{{result.link}}" class="result-title">{{result.name}}</a>
             <p class="description" >{{result.description}}</p>
