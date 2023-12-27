@@ -11,7 +11,7 @@ public class SriThematiqueVoyageApplication {
 
     public static void main(String[] args) throws IOException {
         SpringApplication.run(SriThematiqueVoyageApplication.class, args);
-        ElasticClientController elasticClientController = new ElasticClientController();
+//        ElasticClientController elasticClientController = new ElasticClientController();
     }
 
 }
