@@ -6,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 
 
 
-
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -17,6 +16,12 @@ export class SearchComponent implements AfterViewInit{
   }
   @ViewChild('searchInput')
   searchInput!: ElementRef;
+  //paths for icons
+  docTypesIcons:any = {
+    'webpage':'../../assets/site.svg',
+    'image':'../../assets/image.svg',
+    'video':'../../assets/video.svg',
+  }
 
 
   ngAfterViewInit(): void {
