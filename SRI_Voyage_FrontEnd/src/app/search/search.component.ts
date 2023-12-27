@@ -44,6 +44,7 @@ export class SearchComponent implements AfterViewInit{
 
   
     openPopup(): void {
+      console.log("openPopup");
       const dialogRef = this.dialog.open(FilterComponent, {
         data: {
           
@@ -59,6 +60,7 @@ export class SearchComponent implements AfterViewInit{
     if(!this.searchQuery){
       this.isError = true;
       setTimeout(()=>this.isError=false,2000)
+      return;
     }
     const apiUrl = `http://localhost:8090/query/${this.searchQuery}`;
 
