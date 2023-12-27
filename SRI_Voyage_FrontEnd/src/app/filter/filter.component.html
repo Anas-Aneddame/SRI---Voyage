@@ -1,0 +1,26 @@
+<div class="custom-dialog-container">
+    <h2 class="dialog-title">Filtres</h2>
+  
+    <div class="section">
+      <label>Budget</label>
+      <div class="input-line">
+        <input type="number" placeholder="Min" [(ngModel)]="minBudget">
+        <input type="number" placeholder="Max" [(ngModel)]="maxBudget">
+      </div>
+    </div>
+
+    <div class="section">
+        <label>City</label>
+        <div>
+        <select [(ngModel)]="selectedCity" class="custom-select">
+        <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+        </select>
+    </div>
+    </div>
+  
+    <div class="actions">
+      <button mat-button (click)="onNoClick()" class="custom-button">Cancel</button>
+      <button mat-button (click)="onApplyClick()" class="custom-button">Apply</button>
+    </div>
+  </div>
+  
