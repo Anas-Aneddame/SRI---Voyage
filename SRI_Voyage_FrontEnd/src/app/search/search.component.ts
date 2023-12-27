@@ -1,4 +1,4 @@
-import { AfterViewInit, Component , ElementRef, NgZone, ViewChild } from '@angular/core';
+import { AfterContentChecked, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component , DoCheck, ElementRef, NgZone, OnChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FilterComponent } from '../filter/filter.component';
 import { HttpClient } from '@angular/common/http';
@@ -22,6 +22,7 @@ export class SearchComponent implements AfterViewInit{
   filterData: any;
   isError = false;
   renderedResults:any[] = []
+  areResultsRendered = false;
 
 
 
@@ -38,9 +39,10 @@ export class SearchComponent implements AfterViewInit{
 
 
   ngAfterViewInit(): void {
-    const inputEl = document.getElementById('search-input')
-    console.log(inputEl)
-    this.searchQuery = this.searchInput.nativeElement.value
+    setTimeout(()=>{
+      console.log(this.searchInput?.nativeElement.value);
+      this.searchQuery = this.searchInput.nativeElement.value
+    },500)
   }
 
 
@@ -54,6 +56,10 @@ export class SearchComponent implements AfterViewInit{
     this.isExpanded = false;
   }
 
+  handleQueryChange(event:any){
+    console.log("handleQueryChange()");
+    this.areResultsRendered = false;
+  }
 
 
 
@@ -90,11 +96,12 @@ export class SearchComponent implements AfterViewInit{
       'Content-Type': 'application/json'
     };
     const apiUrl = `http://localhost:8090/query/${this.searchQuery}`;
-
+    
     if (Object.values(searchParams).some(value => value !== undefined && value !== '')) {
       console.log(searchParams);
       this.httpClient.post(apiUrl, searchParams,{headers}).subscribe(
         (response: any) => {
+          this.areResultsRendered = true;
           this.results = response;
           this.renderedResults = this.results;
           this.changeSelectedDocType('all');
@@ -106,13 +113,14 @@ export class SearchComponent implements AfterViewInit{
         (error) => {
           console.error('Error fetching search results:', error);
         }
-      );
-    } else {
-
-    
-    this.httpClient.get(apiUrl).subscribe(
-      (response: any) => {
-        this.results = response;
+        );
+      } else {
+        
+        
+        this.httpClient.get(apiUrl).subscribe(
+          (response: any) => {
+            this.areResultsRendered = true;
+            this.results = response;
         this.renderedResults = this.results
         this.changeSelectedDocType('all')
         console.log('Search results:', this.results);
