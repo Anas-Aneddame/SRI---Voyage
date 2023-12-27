@@ -22,13 +22,13 @@ public class ElasticSearchController {
     public List<SearchDocument> query(@PathVariable String searchtext){
 
 
-        return this.elasticClient.queryDocument(searchtext,Optional.of(new SearchFilter()));
+        return this.elasticClient.queryDocumentGet(searchtext);
     }
     @PostMapping("/query/{searchtext}")
-    public List<SearchDocument> query(@PathVariable String searchtext,@RequestBody(required = false)SearchFilter searchFilter){
+    public List<SearchDocument> query(@PathVariable String searchtext,@RequestBody SearchFilter searchFilter){
         System.out.println(searchFilter);
 
-        return this.elasticClient.queryDocument(searchtext, Optional.of(searchFilter));
+        return this.elasticClient.queryDocumentPost(searchtext, searchFilter);
     }
 
 

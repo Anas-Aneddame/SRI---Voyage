@@ -56,7 +56,7 @@ public class ElasticClient {
 //        return esClient;
     }
 
-    public List<SearchDocument> queryDocument(String searchtext, Optional<SearchFilter> searchFilter)  {
+    public List<SearchDocument> queryDocumentPost(String searchtext, SearchFilter searchFilter)  {
         AnalyzeRequest.Builder analyzeRequestBuilder = new AnalyzeRequest.Builder();
         AnalyzeRequest analyzeRequest = analyzeRequestBuilder.analyzer("french").text(searchtext).build();
         AnalyzeResponse analyzeResponse = null;
@@ -79,30 +79,29 @@ public class ElasticClient {
             queryText = queryText+" ";
 
         }
-        String city;
-        String maxBudget;
 
-        if(searchFilter.isPresent()) {
-            city = searchFilter.get().getSelectedCity();
-            maxBudget = searchFilter.get().getMaxBudget();
-        }
-        else{
-            city="";
-            maxBudget="";
-        }
-        Query byName = MatchQuery.of(m -> m
-                .field("city")
-                .query(city)
-        )._toQuery();
-//            Query byActicities = MatchQuery.of(m -> m
-//                    .field("activities")
-//                    .query("handball Hammam")
-//            )._toQuery();
+        List<Query> queryFilterList =  new ArrayList<>();
 
-        Query byMaxPrice = RangeQuery.of(r -> r
-                .field("price")
-                .lte(JsonData.of(maxBudget))
-        )._toQuery();
+        if(searchFilter.getSelectedCity()!=null)
+        {
+            Query byName = MatchQuery.of(m -> m
+                    .field("city")
+                    .query(searchFilter.getSelectedCity())
+            )._toQuery();
+            queryFilterList.add(byName);
+        }
+        if(searchFilter.getMaxBudget()!=null)
+        {
+            Double min = searchFilter.getMinBudget()!=null?searchFilter.getMinBudget():0;
+            Query byMaxPrice = RangeQuery.of(r -> r
+                    .field("price").gte(JsonData.of(min))
+                    .lte(JsonData.of(searchFilter.getMaxBudget()))
+
+            )._toQuery();
+            queryFilterList.add(byMaxPrice);
+        }
+
+
         SearchResponse<SearchDocument> response = null;
         try {
             response = elasticsearchClient.search(s -> s
@@ -110,10 +109,13 @@ public class ElasticClient {
                             .query(q -> q.bool(
                                     b->b.should(
                                             queryList
-                                    ).filter(byName))
+                                    ).filter(queryFilterList))
                             ),
                     SearchDocument.class
             );
+
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -141,6 +143,75 @@ public class ElasticClient {
 
         searchDocumentList.sort((a,b)->
             Double.compare( Double.valueOf(b.getScore()), Double.valueOf(a.getScore()) )
+        );
+
+        return searchDocumentList;
+    }
+
+    public List<SearchDocument> queryDocumentGet(String searchtext)  {
+        AnalyzeRequest.Builder analyzeRequestBuilder = new AnalyzeRequest.Builder();
+        AnalyzeRequest analyzeRequest = analyzeRequestBuilder.analyzer("french").text(searchtext).build();
+        AnalyzeResponse analyzeResponse = null;
+
+        try {
+            analyzeResponse = elasticsearchClient.indices().analyze(
+                    analyzeRequest
+            );
+        } catch (IOException e) {
+            System.out.println("Error with Analyzer");
+            throw new RuntimeException(e);
+        }
+        String queryText = "";
+        //Construct Queries
+        List<Query> queryList = new ArrayList<>();
+        for(AnalyzeToken word : analyzeResponse.tokens()) {
+            queryList.add(Query.of(sh->sh.fuzzy(f->f.field("description").value(word.token()))));
+            queryList.add(Query.of(sh->sh.fuzzy(f->f.field("name").value(word.token()))));
+            queryList.add(Query.of(sh->sh.fuzzy(f->f.field("name").value(word.token()))));
+            queryText = queryText+" ";
+
+        }
+
+        SearchResponse<SearchDocument> response = null;
+        try {
+            response = elasticsearchClient.search(s -> s
+                            .index("voyage")
+                            .query(q -> q.bool(
+                                    b->b.should(
+                                            queryList
+                                    ))
+                            ),
+                    SearchDocument.class
+            );
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        List<SearchDocument> searchDocumentList=new ArrayList<>();
+
+
+        for(Hit h:response.hits().hits())
+        {
+
+            SearchDocument s = (SearchDocument) h.source();
+            s.setScore(String.valueOf(h.score()));
+            searchDocumentList.add(s);
+            System.out.println("/////////////////////////////////////////////");
+            System.out.println("Score");
+            System.out.println(h.source());
+            System.out.println("Price");
+            System.out.println(s.getPrice());
+            System.out.println("Activities");
+            System.out.println(s.getActivities());
+
+            System.out.println(h.score());
+
+        }
+
+        searchDocumentList.sort((a,b)->
+                Double.compare( Double.valueOf(b.getScore()), Double.valueOf(a.getScore()) )
         );
 
         return searchDocumentList;

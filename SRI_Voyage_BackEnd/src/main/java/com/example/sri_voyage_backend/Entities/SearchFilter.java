@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SearchFilter {
-    String minBudget;
-    String maxBudget;
+    Double minBudget;
+    Double maxBudget;
     String selectedCity;
 }
