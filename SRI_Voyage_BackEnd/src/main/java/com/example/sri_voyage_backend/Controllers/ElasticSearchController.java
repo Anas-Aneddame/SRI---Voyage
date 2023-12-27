@@ -200,7 +200,7 @@ public class ElasticSearchController {
                         .id("011")
                         .type("image")
                         .name("Les vacances toniques L'Atlantique comme aire de jeu")
-//                        .city("Agadir")
+                        .city("Agadir")
 //                        .price(3900D)
 //                        .duration(String.valueOf(0))
                         .imageLink("https://www.visitmorocco.com/sites/default/files/thumbnails/image/Catamaran_0.jpg")
