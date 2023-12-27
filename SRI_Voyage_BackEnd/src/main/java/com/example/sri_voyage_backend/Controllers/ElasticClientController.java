@@ -4,13 +4,16 @@ package com.example.sri_voyage_backend.Controllers;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.analysis.*;
 import co.elastic.clients.elasticsearch._types.mapping.Property;
+import co.elastic.clients.elasticsearch._types.query_dsl.MatchQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.Operator;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
+import co.elastic.clients.elasticsearch._types.query_dsl.RangeQuery;
 import co.elastic.clients.elasticsearch.core.IndexResponse;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.elasticsearch.indices.*;
 import co.elastic.clients.elasticsearch.indices.analyze.AnalyzeToken;
+import co.elastic.clients.json.JsonData;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
@@ -143,7 +146,7 @@ public class ElasticClientController {
 
         AnalyzeRequest.Builder analyzeRequestBuilder = new AnalyzeRequest.Builder();
 
-        String query = "cascades d'ouzoud excursion";
+        String query = "tour eiffel";
         AnalyzeRequest analyzeRequest = analyzeRequestBuilder.analyzer("french").text(query).build();
         AnalyzeResponse analyzeResponse = esClient.indices().analyze(
                 analyzeRequest
@@ -177,12 +180,22 @@ public class ElasticClientController {
             queryList.add(Query.of(sh->sh.fuzzy(f->f.field("name").value(tok.token()))));
 
         }
+        Query byName = MatchQuery.of(m -> m
+                .field("city")
+                .query("marrakech")
+        )._toQuery();
+
+        Query byMaxPrice = RangeQuery.of(r -> r
+                .field("price")
+                .lte(JsonData.of(190.0))
+        )._toQuery();
         SearchResponse<SearchDocument> response = esClient.search(s -> s
                         .index("voyage")
                         .query(q -> q.bool(
                                 b->b.should(
                                         queryList
-                                ))
+                                ).must(byMaxPrice,byName))
+
                         ),
                 SearchDocument.class
         );
@@ -196,7 +209,10 @@ public class ElasticClientController {
             System.out.println(s.getName());
             System.out.println("Description");
             System.out.println(s.getDescription());
+            System.out.println("Price");
+            System.out.println(s.getPrice());
             System.out.println("Score");
+
             System.out.println(h.score());
 
         }

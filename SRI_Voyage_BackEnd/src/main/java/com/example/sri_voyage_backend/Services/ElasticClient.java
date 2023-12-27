@@ -1,11 +1,14 @@
 package com.example.sri_voyage_backend.Services;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.query_dsl.Query;
+import co.elastic.clients.elasticsearch._types.query_dsl.RangeQuery;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.elasticsearch.indices.AnalyzeRequest;
 import co.elastic.clients.elasticsearch.indices.AnalyzeResponse;
 import co.elastic.clients.elasticsearch.indices.analyze.AnalyzeToken;
+import co.elastic.clients.json.JsonData;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
@@ -70,7 +73,8 @@ public class ElasticClient {
             stringBuilder.append(tok.token()+" ");
 //            analysedSearchText=analysedSearchText+" "+tok.token();
         }
-        
+
+
         String finalAnalysedSearchText = stringBuilder.toString();
         SearchResponse<SearchDocument> response = null;
         try {
@@ -102,6 +106,9 @@ public class ElasticClient {
             System.out.println("/////////////////////////////////////////////");
             System.out.println("Score");
             System.out.println(h.source());
+            System.out.println("Price");
+            System.out.println(s.getPrice());
+
             System.out.println(h.score());
 
         }
