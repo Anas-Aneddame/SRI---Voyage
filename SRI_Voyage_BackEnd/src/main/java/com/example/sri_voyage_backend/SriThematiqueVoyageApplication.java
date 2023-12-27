@@ -1,6 +1,6 @@
-package com.example.sri_thematique_voyage;
+package com.example.sri_voyage_backend;
 
-import com.example.sri_thematique_voyage.Controllers.ElasticClientController;
+import com.example.sri_voyage_backend.Controllers.ElasticClientController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -11,7 +11,7 @@ public class SriThematiqueVoyageApplication {
 
     public static void main(String[] args) throws IOException {
         SpringApplication.run(SriThematiqueVoyageApplication.class, args);
-        ElasticClientController elasticClientController = new ElasticClientController();
+//        ElasticClientController elasticClientController = new ElasticClientController();
     }
 
 }

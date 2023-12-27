@@ -1,0 +1,155 @@
+package com.example.sri_voyage_backend.Controllers;
+
+
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.analysis.*;
+import co.elastic.clients.elasticsearch.core.SearchResponse;
+import co.elastic.clients.elasticsearch.core.search.Hit;
+import co.elastic.clients.elasticsearch.indices.*;
+import co.elastic.clients.elasticsearch.indices.analyze.AnalyzeToken;
+import co.elastic.clients.json.jackson.JacksonJsonpMapper;
+import co.elastic.clients.transport.ElasticsearchTransport;
+import co.elastic.clients.transport.rest_client.RestClientTransport;
+import co.elastic.clients.util.ObjectBuilder;
+import com.example.sri_voyage_backend.Entities.SearchDocument;
+import org.apache.http.Header;
+import org.apache.http.HttpHost;
+import org.apache.http.message.BasicHeader;
+import org.elasticsearch.client.RestClient;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+
+public class ElasticClientController {
+    public ElasticClientController() throws IOException {
+    String serverUrl = "https://48cf8c7b250b4bd1984f99117884d19c.us-central1.gcp.cloud.es.io";
+    String apiKey = "T2J1bHBZd0JXOUNQRVllZWp1c3g6QXpadjhZMVpTVHllektROGpiUFBJZw==";
+
+    // Create the low-level client
+    RestClient restClient = RestClient
+            .builder(HttpHost.create(serverUrl))
+            .setDefaultHeaders(new Header[]{
+                    new BasicHeader("Authorization", "ApiKey " + apiKey)
+            })
+            .build();
+
+    // Create the transport with a Jackson mapper
+    ElasticsearchTransport transport = new RestClientTransport(
+            restClient, new JacksonJsonpMapper());
+
+    // And create the API client
+    ElasticsearchClient esClient = new ElasticsearchClient(transport);
+//        esClient.indices().create(c -> c
+//                .index("products")
+//
+//        );
+//        Product product = new Product("bk-2", "City bike", 123.0);
+//
+//        IndexResponse response = esClient.index(i -> i
+//                .index("products")
+//                .id(product.getSku())
+//                .document(product)
+//        );
+
+//        CreateIndexRequest.Builder createIndexRequest = new CreateIndexRequest.Builder();
+//        IndexSettings.Builder indexsettings = new IndexSettings.Builder();
+        IndexSettingsAnalysis.Builder indexSettingsAnalysis = new IndexSettingsAnalysis.Builder();
+        TokenFilter.Builder frenchTokenb = new TokenFilter.Builder();
+
+        TokenFilterDefinition.Builder tokenfilterb = new TokenFilterDefinition.Builder();
+        ElisionTokenFilter.Builder elision = new ElisionTokenFilter.Builder();
+
+        elision.articles(List.of("a", "afin", "ai", "ainsi", "après", "attendu", "au", "aujourd", "auquel", "aussi",
+                "autre", "autres", "aux", "auxquelles", "auxquels", "avait", "avant", "avec", "avoir",
+                "c", "car", "ce", "ceci", "cela", "celle", "celles", "celui", "cependant", "certain",
+                "certaine", "certaines", "certains", "ces", "cet", "cette", "ceux", "chez", "ci",
+                "combien", "comme", "comment", "concernant", "contre", "d", "dans", "de", "debout",
+                "dedans", "dehors", "delà", "depuis", "derrière", "des", "désormais", "desquelles",
+                "desquels", "dessous", "dessus", "devant", "devers", "devra", "divers", "diverse",
+                "diverses", "doit", "donc", "dont", "du", "duquel", "durant", "dès", "elle", "elles",
+                "en", "entre", "environ", "est", "et", "etc", "etre", "eu", "eux", "excepté", "hormis",
+                "hors", "hélas", "hui", "il", "ils", "j", "je", "jusqu", "jusque", "l", "la", "laquelle",
+                "le", "lequel", "les", "lesquelles", "lesquels", "leur", "leurs", "lorsque", "lui", "là",
+                "ma", "mais", "malgré", "me", "merci", "mes", "mien", "mienne", "miennes", "miens", "moi",
+                "moins", "mon", "moyennant", "même", "mêmes", "n", "ne", "ni", "non", "nos", "notre",
+                "nous", "néanmoins", "nôtre", "nôtres", "on", "ont", "ou", "outre", "où", "par", "parmi",
+                "partant", "pas", "passé", "pendant", "plein", "plus", "plusieurs", "pour", "pourquoi",
+                "proche", "près", "puisque", "qu", "quand", "que", "quel", "quelle", "quelles", "quels",
+                "qui", "quoi", "quoique", "revoici", "revoilà", "s", "sa", "sans", "sauf", "se", "selon",
+                "seront", "ses", "si", "sien", "sienne", "siennes", "siens", "sinon", "soi", "soit",
+                "son", "sont", "sous", "suivant", "sur", "ta", "te", "tes", "tien", "tienne", "tiennes",
+                "tiens", "toi", "ton", "tous", "tout", "toute", "toutes", "tu", "un", "une", "va", "vers",
+                "voici", "voilà", "vos", "votre", "vous", "vu", "vôtre", "vôtres", "y", "à", "ça", "ès",
+                "été", "être", "ô"));
+        TokenFilterDefinition tokenFilterdef = tokenfilterb.elision(elision.build()).build();
+//        StopTokenFilter.Builder stopToken = new StopTokenFilter.Builder();
+//        stopToken.stopwords("au","d'");
+//        tokenfilterb.stop(stopToken.build());
+
+        TokenFilter frenchToken = frenchTokenb.definition(tokenFilterdef).build();
+
+
+
+
+        System.out.println("Get : "+ frenchToken._get().toString());
+        System.out.println("Kind : "+ frenchToken._kind().toString());
+
+//        Analyzer.Builder analyzer = new Analyzer.Builder();
+//        CustomAnalyzer.Builder customanalyzer = new CustomAnalyzer.Builder();
+//
+        Tokenizer.Builder tokenBuilder = new Tokenizer.Builder();
+        Tokenizer token =  tokenBuilder.name("standard").build();
+
+//        System.out.println(token._get());
+        List<String> texts = new ArrayList<>();
+        String searchText = "";
+        texts.add(searchText);
+
+        TokenFilter.Builder tokenFilter = new TokenFilter.Builder();
+        TokenFilter tokenFilter1 = tokenFilter.name("stop").build();
+//        TokenFilter.Builder tokenFilterbuilder = new TokenFilter.Builder();
+
+//        TokenFilter tokenFilter2 = tokenFilterbuilder.name("keyword_repeat").build();
+        AnalyzeRequest.Builder analyzeRequestBuilder = new AnalyzeRequest.Builder();
+        AnalyzeResponse analyzeResponse = esClient.indices().analyze(
+                analyzeRequestBuilder.tokenizer(token).filter(frenchToken).text(texts).build()
+        );
+        String quote = "journée au belle cascade d'ouzoud";
+        for(AnalyzeToken tok: analyzeResponse.tokens())
+        {
+            quote=quote+" "+tok.token();
+        }
+        System.out.println(quote);
+
+
+        String finalQuote = quote;
+        SearchResponse<SearchDocument> response = esClient.search(s -> s
+                        .index("voyages")
+                        .query(q -> q
+                                .match(t -> t
+                                        .field("description")
+                                        .query(finalQuote)
+
+                                )
+                        ),
+                SearchDocument.class
+        );
+
+
+        for(Hit h:response.hits().hits())
+        {
+            SearchDocument s = (SearchDocument) h.source();
+            System.out.println("/////////////////////////////////////////////");
+            System.out.println("City");
+            System.out.println(s.getCity());
+            System.out.println("Description");
+            System.out.println(s.getDescription());
+            System.out.println("Score");
+            System.out.println(h.score());
+
+        }
+}}
