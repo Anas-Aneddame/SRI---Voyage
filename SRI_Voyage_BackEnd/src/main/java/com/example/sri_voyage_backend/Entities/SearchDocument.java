@@ -1,12 +1,11 @@
 package com.example.sri_voyage_backend.Entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter @Setter
 public class SearchDocument {
     private String id;
     private String name;
@@ -17,5 +16,5 @@ public class SearchDocument {
     private String link;
     private String description;
     private String type;
-
+    private String score;
 }
